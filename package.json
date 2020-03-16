@@ -1,0 +1,47 @@
+{
+  "name": "@psi/databuffer-query-js",
+  "description": "JS client API for ch.psi.daq.queryrest",
+  "version": "0.2.2",
+  "author": "Paul Scherrer Institute, Switzerland",
+  "license": "GPL-3.0-or-later",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulscherrerinstitute/databuffer-query-js.git"
+  },
+  "publishConfig": {
+    "registry": "http://npm.psi.ch"
+  },
+  "module": "index.js",
+  "types": "index.d.ts",
+  "scripts": {
+    "build": "tsc --build tsconfig.json",
+    "clean": "rm -rf dist/",
+    "docs": "typedoc --mode modules --ignoreCompilerErrors --excludePrivate --out docs/api ./src",
+    "format": "npm run format:eslint && npm run format:prettier",
+    "format:eslint": "eslint --ext .ts . --fix",
+    "format:prettier": "prettier \"**/*.ts\" --write",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:eslint": "eslint --ext .ts,.html .",
+    "lint:prettier": "prettier \"**/*.ts\" --list-different || (echo '↑↑ these files are not prettier formatted ↑↑' && exit 1)",
+    "mypublish:pre": "npm run clean && npm run build && cp README.md package.json ./dist/",
+    "mypublish": "npm run mypublish:pre && npm publish ./dist",
+    "mypack": "npm run mypublish:pre && npm pack ./dist",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@open-wc/eslint-config": "^0.4.5",
+    "@open-wc/prettier-config": "^0.1.10",
+    "@types/jest": "^24.0.15",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
+    "eslint": "^5.16.0",
+    "jest": "^24.8.0",
+    "jest-fetch-mock": "^2.1.2",
+    "lit-html": "^1.1.0",
+    "prettier": "^1.18.2",
+    "ts-jest": "^24.0.2",
+    "tslib": "^1.10.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.5.2"
+  }
+}

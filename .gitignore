@@ -1,0 +1,43 @@
+.cache/
+build/
+coverage/
+dist/
+docs/api/
+docs/dependencies.*
+node_modules/
+
+*.zip
+*.tar.gz
+*.tgz
+
+# We code in TypeScript; these files are output
+# ----------------------------------------------------------------------
+src/**/*.d.ts
+src/**/*.js
+src/**/*.js.map
+test/**/*.d.ts
+test/**/*.js
+test/**/*.js.map
+
+# OS generated files
+# ----------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# log files
+*.log
+
+# Backup files of various editors
+# ----------------------------------------------------------------------
+*~
+*.bak
+*.swp
+
+# Configurations of various IDEs
+# ----------------------------------------------------------------------
+.vscode/
