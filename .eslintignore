@@ -1,4 +1,5 @@
-coverage/
 _site/
-dist/
 build/
+coverage/
+dist/
+docs/
