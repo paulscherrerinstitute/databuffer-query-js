@@ -7,16 +7,16 @@
  * fetch(url, { ...COMMON_FETCH_OPTIONS, body: JSON.stringify(payloadData) }).then( ... )
  */
 export const COMMON_FETCH_OPTIONS: RequestInit = {
-  method: 'POST',
-  mode: 'cors',
-  cache: 'no-cache',
-  credentials: 'omit',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  redirect: 'follow',
-  referrer: 'no-referrer',
-};
+	method: 'POST',
+	mode: 'cors',
+	cache: 'no-cache',
+	credentials: 'omit',
+	headers: {
+		'Content-Type': 'application/json',
+	},
+	redirect: 'follow',
+	referrer: 'no-referrer',
+}
 
 /**
  * post sends a HTTP POST request to a URL.
@@ -33,29 +33,30 @@ export const COMMON_FETCH_OPTIONS: RequestInit = {
  * @param payload The *optional* payload of the request
  */
 export const post = async <T>(url: string, body?: any): Promise<T> => {
-  const options: RequestInit = {
-    ...COMMON_FETCH_OPTIONS,
-    method: 'POST',
-  };
-  if (body !== undefined) options.body = JSON.stringify(body);
-  return fetchWithTimeout<T>(url, options);
-};
+	const options: RequestInit = {
+		...COMMON_FETCH_OPTIONS,
+		method: 'POST',
+	}
+	if (body !== undefined) options.body = JSON.stringify(body)
+	return fetchWithTimeout<T>(url, options)
+}
 
 export const fetchWithTimeout = async <T>(
-  url: string,
-  options: RequestInit,
-  timeout: number = 30000,
+	url: string,
+	options: RequestInit,
+	timeout: number = 30000
 ): Promise<T> => {
-  const id = setTimeout(() => {
-    throw new Error('Request timed out');
-  }, timeout);
-  try {
-    const response = await fetch(url, options);
-    clearTimeout(id);
-    if (!response.ok) throw new Error(`${response.status}: ${response.statusText}`);
-    return (await response.json()) as T;
-  } catch (err) {
-    clearTimeout(id);
-    throw err;
-  }
-};
+	const id = setTimeout(() => {
+		throw new Error('Request timed out')
+	}, timeout)
+	try {
+		const response = await fetch(url, options)
+		clearTimeout(id)
+		if (!response.ok)
+			throw new Error(`${response.status}: ${response.statusText}`)
+		return (await response.json()) as T
+	} catch (err) {
+		clearTimeout(id)
+		throw err
+	}
+}

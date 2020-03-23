@@ -1,50 +1,50 @@
-import { post } from '../http-request';
-import { QueryResponse } from './response';
+import { post } from '../http-request'
+import { QueryResponse } from './response'
 
 /**
  * Ordering defines how the backend should order the results of a query.
  */
 export enum Ordering {
-  /** NONE applies no order to the results. This is the **default**. */
-  NONE = 'none',
+	/** NONE applies no order to the results. This is the **default**. */
+	NONE = 'none',
 
-  /** ASC sorts results in ascending alpha-numeric order. */
-  ASC = 'asc',
+	/** ASC sorts results in ascending alpha-numeric order. */
+	ASC = 'asc',
 
-  /** DESC sorts results in descending alpha-numeric order. */
-  DESC = 'desc',
+	/** DESC sorts results in descending alpha-numeric order. */
+	DESC = 'desc',
 }
 
 /**
  * QueryOptions defines a query for channel names.
  */
 export interface QueryOptions {
-  /**
-   * regex defines the search pattern used to filter channel names.
-   *
-   * If not present or undefined (**default**), no filter will be applied.
-   * Filtering is done using Java's `Pattern`, i.e. `Matcher.find()`.
-   */
-  regex?: string;
+	/**
+	 * regex defines the search pattern used to filter channel names.
+	 *
+	 * If not present or undefined (**default**), no filter will be applied.
+	 * Filtering is done using Java's `Pattern`, i.e. `Matcher.find()`.
+	 */
+	regex?: string
 
-  /**
-   * backends limits the query for channel names to specific backends (data providers).
-   *
-   * If not present or undefined (**default**), all backends will be queried for their channels.
-   */
-  backends?: Array<string>;
+	/**
+	 * backends limits the query for channel names to specific backends (data providers).
+	 *
+	 * If not present or undefined (**default**), all backends will be queried for their channels.
+	 */
+	backends?: Array<string>
 
-  /**
-   * ordering defines the order of the results returned from the backends.
-   * **Default** is [[Ordering.NONE]].
-   */
-  ordering?: Ordering;
+	/**
+	 * ordering defines the order of the results returned from the backends.
+	 * **Default** is [[Ordering.NONE]].
+	 */
+	ordering?: Ordering
 
-  /**
-   * reload will force the server to reload cached channel names, if set.
-   * **Default** is `false`.
-   */
-  reload?: boolean;
+	/**
+	 * reload will force the server to reload cached channel names, if set.
+	 * **Default** is `false`.
+	 */
+	reload?: boolean
 }
 
 /**
@@ -59,9 +59,9 @@ export interface QueryOptions {
  * @returns A `Promise` with the results from the query.
  */
 export const queryChannelNames = async (
-  baseUrl: string,
-  options: QueryOptions,
+	baseUrl: string,
+	options: QueryOptions
 ): Promise<QueryResponse> => {
-  const endpoint = `${baseUrl}/channels`;
-  return post<QueryResponse>(endpoint, options);
-};
+	const endpoint = `${baseUrl}/channels`
+	return post<QueryResponse>(endpoint, options)
+}
