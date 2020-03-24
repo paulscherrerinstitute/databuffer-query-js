@@ -58,10 +58,10 @@ export interface QueryOptions {
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryChannelNames = async (
+export const queryChannelNames = (
 	baseUrl: string,
 	options: QueryOptions
 ): Promise<QueryResponse> => {
 	const endpoint = `${baseUrl}/channels`
-	return post<QueryResponse>(endpoint, options)
+	return post(endpoint, options) as Promise<QueryResponse>
 }

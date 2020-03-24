@@ -69,10 +69,10 @@ export enum Ordering {
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryData = async (
+export const queryData = (
 	baseUrl: string,
 	options: QueryRequest
 ): Promise<QueryResponse> => {
 	const endpoint = `${baseUrl}/query`
-	return await post<QueryResponse>(endpoint, options)
+	return post(endpoint, options) as Promise<QueryResponse>
 }

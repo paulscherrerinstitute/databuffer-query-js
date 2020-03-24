@@ -26,24 +26,24 @@ export const COMMON_FETCH_OPTIONS: RequestInit = {
  *
  * @param url The URL to send the POST request to.
  * @param options Request options (headers, payload, etc.).
- * @param timeout The timeout (in milliseconds) to wait for a response.
- *
- * @typeParam T The type of the response
+ * @param timeoutMs The timeout (in milliseconds) to wait for a response.
  */
-export const fetchWithTimeout = async <T>(
+export const fetchWithTimeout = async (
 	url: string,
 	options: RequestInit,
-	timeout: number = 30000
-): Promise<T> => {
+	timeoutMs: number = 30000
+): Promise<unknown> => {
 	let timerId
 	const abortController = new AbortController()
+	options.signal = abortController.signal
 	try {
 		const timerPromise = new Promise(() => {
 			timerId = setTimeout(() => {
 				abortController.abort() // upon timeout, abort the pending request
 				throw new Error('Request timed out')
-			}, timeout)
+			}, timeoutMs)
 		})
+
 		const response = (await Promise.race([
 			timerPromise,
 			fetch(url, options),
@@ -51,7 +51,7 @@ export const fetchWithTimeout = async <T>(
 		clearTimeout(timerId)
 		if (!response.ok)
 			throw new Error(`${response.status}: ${response.statusText}`)
-		return (await response.json()) as T
+		return await response.json()
 	} catch (err) {
 		clearTimeout(timerId)
 		throw err
@@ -72,14 +72,13 @@ export const fetchWithTimeout = async <T>(
  * @param url The URL to send the POST request to
  * @param body The *optional* payload to be sent with the request
  *
- * @typeParam T The type of the response
- * @typeParam B The type of the request body
+ * @typeParam T The type of the request body
  */
-export const post = async <T, B>(url: string, body?: B): Promise<T> => {
+export const post = async <T>(url: string, body?: T) => {
 	const options: RequestInit = {
 		...COMMON_FETCH_OPTIONS,
 		method: 'POST',
 	}
 	if (body !== undefined) options.body = JSON.stringify(body)
-	return fetchWithTimeout<T>(url, options)
+	return fetchWithTimeout(url, options)
 }
