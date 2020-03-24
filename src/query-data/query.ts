@@ -24,15 +24,27 @@ export interface QueryRequest {
 	/** range defines the amount of data to be retrieved (X axis) */
 	range: QueryRange
 
+	/**
+	 * configFields holds the config fields that are being requested.
+	 * **Default** is not to query config fields.
+	 */
 	configFields?: Array<ConfigField>
 
+	/**
+	 * eventFields holds the event fields that are being requested.
+	 * **Default** is a predefined set of fields.
+	 */
 	eventFields?: Array<EventField>
 
-	// ### TODO: document
+	/**
+	 * aggregation, if set will trigger aggregation.
+	 * **Default** is no aggregation.
+	 */
 	aggregation?: AggregationSpecification
 
 	/**
 	 * response instructs the API server to format the response in a certain way.
+	 * **Default** is JSON, without compression, following redirects.
 	 */
 	response?: QueryResponseFormat
 
