@@ -2,8 +2,8 @@ import {
 	queryData,
 	QueryRequest,
 	QueryResponse,
-	ConfigFields,
-	EventFields,
+	ConfigField,
+	EventField,
 } from '../src/query-data'
 import { post } from '../src/http-request'
 
@@ -37,11 +37,11 @@ describe('query-data', () => {
 				{ backend: 'backend1', name: 'chan1' },
 				{ backend: 'backend2', name: 'chan2' },
 			],
-			configFields: [ConfigFields.GLOBAL_MILLIS, ConfigFields.TYPE],
+			configFields: [ConfigField.GLOBAL_MILLIS, ConfigField.TYPE],
 			eventFields: [
-				EventFields.GLOBAL_MILLIS,
-				EventFields.PULSE_ID,
-				EventFields.VALUE,
+				EventField.GLOBAL_MILLIS,
+				EventField.PULSE_ID,
+				EventField.VALUE,
 			],
 			range: {
 				startPulseId: 1,
@@ -59,19 +59,19 @@ describe('query-data', () => {
 			{
 				channel: { backend: 'backend1', name: 'chan11' },
 				data: [
-					{ [EventFields.VALUE]: [11.0], [EventFields.GLOBAL_MILLIS]: 1100 },
-					{ [EventFields.VALUE]: [11.1], [EventFields.GLOBAL_MILLIS]: 1110 },
-					{ [EventFields.VALUE]: [11.2], [EventFields.GLOBAL_MILLIS]: 1120 },
-					{ [EventFields.VALUE]: [11.3], [EventFields.GLOBAL_MILLIS]: 1130 },
+					{ [EventField.VALUE]: [11.0], [EventField.GLOBAL_MILLIS]: 1100 },
+					{ [EventField.VALUE]: [11.1], [EventField.GLOBAL_MILLIS]: 1110 },
+					{ [EventField.VALUE]: [11.2], [EventField.GLOBAL_MILLIS]: 1120 },
+					{ [EventField.VALUE]: [11.3], [EventField.GLOBAL_MILLIS]: 1130 },
 				],
 			},
 			{
 				channel: { backend: 'backend2', name: 'chan21' },
 				data: [
-					{ [EventFields.VALUE]: [21.0], [EventFields.GLOBAL_MILLIS]: 2100 },
-					{ [EventFields.VALUE]: [21.1], [EventFields.GLOBAL_MILLIS]: 2110 },
-					{ [EventFields.VALUE]: [21.2], [EventFields.GLOBAL_MILLIS]: 2120 },
-					{ [EventFields.VALUE]: [21.3], [EventFields.GLOBAL_MILLIS]: 2130 },
+					{ [EventField.VALUE]: [21.0], [EventField.GLOBAL_MILLIS]: 2100 },
+					{ [EventField.VALUE]: [21.1], [EventField.GLOBAL_MILLIS]: 2110 },
+					{ [EventField.VALUE]: [21.2], [EventField.GLOBAL_MILLIS]: 2120 },
+					{ [EventField.VALUE]: [21.3], [EventField.GLOBAL_MILLIS]: 2130 },
 				],
 			},
 		]

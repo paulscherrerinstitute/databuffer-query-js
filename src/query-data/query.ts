@@ -4,7 +4,7 @@ import { post } from '../http-request'
 import { QueryRange } from './range'
 import { AggregationSpecification } from './aggregation'
 import { QueryResponse, QueryResponseFormat } from './response'
-import { ConfigFields, EventFields } from './fields'
+import { ConfigField, EventField } from './fields'
 
 /**
  * QueryRequest defines a query for data points
@@ -24,11 +24,9 @@ export interface QueryRequest {
 	/** range defines the amount of data to be retrieved (X axis) */
 	range: QueryRange
 
-	// ### TODO: document
-	configFields: Array<ConfigFields>
+	configFields?: Array<ConfigField>
 
-	// ### TODO: document
-	eventFields: Array<EventFields>
+	eventFields?: Array<EventField>
 
 	// ### TODO: document
 	aggregation?: AggregationSpecification

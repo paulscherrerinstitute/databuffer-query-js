@@ -1,5 +1,5 @@
 import { Channel } from '../channel'
-import { EventFields } from './fields'
+import { EventField } from './fields'
 
 /**
  * QueryResponse defines the structure of the response from the API.
@@ -30,14 +30,14 @@ export interface QueryResponseItem {
  * the original data query.
  */
 export interface DataPoint {
-	[EventFields.GLOBAL_DATE]?: string
-	[EventFields.GLOBAL_MILLIS]?: number
-	[EventFields.GLOBAL_SECONDS]?: number
-	[EventFields.IOC_DATE]?: string
-	[EventFields.IOC_MILLIS]?: number
-	[EventFields.IOC_SECONDS]?: number
-	[EventFields.PULSE_ID]?: number
-	[EventFields.VALUE]?: number[]
+	[EventField.GLOBAL_DATE]?: string
+	[EventField.GLOBAL_MILLIS]?: number
+	[EventField.GLOBAL_SECONDS]?: number
+	[EventField.IOC_DATE]?: string
+	[EventField.IOC_MILLIS]?: number
+	[EventField.IOC_SECONDS]?: number
+	[EventField.PULSE_ID]?: number
+	[EventField.VALUE]?: number[]
 
 	/** shape defines the number of elements in the value field */
 	shape?: number[]

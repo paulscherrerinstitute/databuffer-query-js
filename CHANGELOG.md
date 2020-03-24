@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- rename enums to singular
+
 ## [0.3.0] - 2020-03-24
 
 Initial release (on github)

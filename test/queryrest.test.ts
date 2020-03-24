@@ -66,14 +66,11 @@ describe('class QueryRest', () => {
 					{ backend: 'backend1', name: 'chan1' },
 					{ backend: 'backend2', name: 'chan2' },
 				],
-				configFields: [
-					qData.ConfigFields.GLOBAL_MILLIS,
-					qData.ConfigFields.TYPE,
-				],
+				configFields: [qData.ConfigField.GLOBAL_MILLIS, qData.ConfigField.TYPE],
 				eventFields: [
-					qData.EventFields.GLOBAL_MILLIS,
-					qData.EventFields.PULSE_ID,
-					qData.EventFields.VALUE,
+					qData.EventField.GLOBAL_MILLIS,
+					qData.EventField.PULSE_ID,
+					qData.EventField.VALUE,
 				],
 				range: {
 					startPulseId: 1,

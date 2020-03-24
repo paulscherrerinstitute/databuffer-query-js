@@ -1,11 +1,10 @@
 /**
- * ConfigFields are fields being retrieved about the configuiration
- * of a [[Channel]] on a backend.
+ * ConfigField enum defines field names on the configuration of a [[Channel]].
  *
  * See also the Java source of the backend:
  * https://git.psi.ch/sf_daq/ch.psi.daq.domain/blob/master/src/main/java/ch/psi/daq/domain/query/operation/ConfigField.java
  */
-export enum ConfigFields {
+export enum ConfigField {
 	/**
 	 * BACKEND holds the name of the backend where the event originated.
 	 */
@@ -125,13 +124,12 @@ export enum ConfigFields {
 }
 
 /**
- * EventFields are fields being retrieved about the events that
- * make up a [[DataPoint]].
+ * EventField enum defines field names on the events that make up a [[DataPoint]].
  *
  * See also the Java source of the backend:
  * https://git.psi.ch/sf_daq/ch.psi.daq.domain/blob/master/src/main/java/ch/psi/daq/domain/query/operation/EventField.java
  */
-export enum EventFields {
+export enum EventField {
 	/**
 	 * BACKEND holds the name of the backend where the event originated.
 	 */
