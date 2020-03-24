@@ -1,44 +1,44 @@
 {
-  "name": "@psi/databuffer-query-js",
-  "description": "JS client API for ch.psi.daq.queryrest",
-  "version": "0.2.2",
-  "author": "Paul Scherrer Institute, Switzerland",
-  "license": "GPL-3.0-or-later",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/paulscherrerinstitute/databuffer-query-js.git"
-  },
-  "publishConfig": {
-    "registry": "http://npm.psi.ch"
-  },
-  "module": "index.js",
-  "types": "index.d.ts",
-  "scripts": {
-    "build": "tsc --build tsconfig.json",
-    "clean": "rm -rf dist/",
-    "docs": "typedoc --mode modules --ignoreCompilerErrors --excludePrivate --out docs/api ./src",
-    "lint:eslint": "eslint 'src/**/*.ts' 'test/**/*.ts'",
+	"name": "@psi/databuffer-query-js",
+	"description": "JS client API for ch.psi.daq.queryrest",
+	"version": "0.3.0",
+	"author": "Paul Scherrer Institute, Switzerland",
+	"license": "GPL-3.0-or-later",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/paulscherrerinstitute/databuffer-query-js.git"
+	},
+	"publishConfig": {
+		"registry": "http://npm.psi.ch"
+	},
+	"module": "index.js",
+	"types": "index.d.ts",
+	"scripts": {
+		"build": "tsc --build tsconfig.json",
+		"clean": "rm -rf dist/",
+		"docs": "typedoc --mode modules --ignoreCompilerErrors --excludePrivate --out docs/api ./src",
+		"lint:eslint": "eslint 'src/**/*.ts' 'test/**/*.ts'",
 		"lint:prettier": "prettier 'src/**/*.ts' 'test/**/*.ts' --list-different || ( echo '↑↑↑  these files are not well formatted  ↑↑↑' && exit 1 )",
 		"format:eslint": "eslint 'src/**/*.ts' 'test/**/*.ts' --fix",
 		"format:prettier": "prettier 'src/**/*.ts' 'test/**/*.ts' --write",
-    "mypublish:pre": "npm run clean && npm run build && cp README.md package.json ./dist/",
-    "mypublish": "npm run mypublish:pre && npm publish ./dist",
-    "mypack": "npm run mypublish:pre && npm pack ./dist",
-    "test": "jest"
-  },
-  "devDependencies": {
-    "@types/jest": "^25.1.4",
-    "@types/node": "^13.9.3",
-    "@typescript-eslint/eslint-plugin": "^2.24.0",
-    "@typescript-eslint/parser": "^2.24.0",
-    "eslint": "^6.8.0",
-    "eslint-plugin-jest": "^23.8.2",
-    "jest": "^25.1.0",
-    "jest-fetch-mock": "^3.0.3",
-    "prettier": "^2.0.1",
-    "ts-jest": "^25.2.1",
-    "tslib": "^1.11.1",
-    "typedoc": "^0.17.3",
-    "typescript": "^3.8.3"
-  }
+		"mypublish:pre": "npm run clean && npm run build && cp README.md package.json ./dist/",
+		"mypublish": "npm run mypublish:pre && npm publish ./dist",
+		"mypack": "npm run mypublish:pre && npm pack ./dist",
+		"test": "jest"
+	},
+	"devDependencies": {
+		"@types/jest": "^25.1.4",
+		"@types/node": "^13.9.3",
+		"@typescript-eslint/eslint-plugin": "^2.24.0",
+		"@typescript-eslint/parser": "^2.24.0",
+		"eslint": "^6.8.0",
+		"eslint-plugin-jest": "^23.8.2",
+		"jest": "^25.1.0",
+		"jest-fetch-mock": "^3.0.3",
+		"prettier": "^2.0.1",
+		"ts-jest": "^25.2.1",
+		"tslib": "^1.11.1",
+		"typedoc": "^0.17.3",
+		"typescript": "^3.8.3"
+	}
 }
