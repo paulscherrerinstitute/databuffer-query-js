@@ -30,5 +30,5 @@ Initial release (on github)
 
 - change generics usage to fix broken build (#6)
 
-[unreleased]: https://github.com/djlauk/punchcard/compare/v0.3.0...HEAD
+[unreleased]: https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.3.0...HEAD
 [0.3.0]: https://github.com/paulscherrerinstitute/databuffer-query-js/releases/v0.3.0
