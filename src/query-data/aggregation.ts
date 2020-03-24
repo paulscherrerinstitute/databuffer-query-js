@@ -1,9 +1,14 @@
 /**
  * AggregationSpecification defines the details of the aggregation.
+ *
+ * See also the Java source of the backend:
+ * [AggregationDescriptor.java](https://git.psi.ch/sf_daq/ch.psi.daq.domain/blob/master/src/main/java/ch/psi/daq/domain/query/operation/AggregationDescriptor.java)
  */
 export interface AggregationSpecification {
 	/**
 	 * aggregationType defines what type of aggregation should be performed.
+	 *
+	 * **Default**: [[AggregationType.VALUE]]
 	 */
 	aggregationType?: AggregationType
 
@@ -14,10 +19,7 @@ export interface AggregationSpecification {
 
 	/**
 	 * extrema requests inclusion of extrema.
-	 *
-	 * See the API docs for details.
 	 */
-	// ### TODO improve doc comment
 	extrema?: Extrema[]
 
 	/**
@@ -44,6 +46,9 @@ export interface AggregationSpecification {
  *
  * See the documentation of the API for details and pictures to
  * illustrate the differences.
+ *
+ * See also the Java source of the backend:
+ * [AggregationType.java](https://git.psi.ch/sf_daq/ch.psi.daq.domain/blob/master/src/main/java/ch/psi/daq/domain/query/operation/AggregationType.java)
  */
 export enum AggregationType {
 	/**
@@ -57,27 +62,92 @@ export enum AggregationType {
 	 * their *array index*. (i.e. row wise aggregation).
 	 */
 	INDEX = 'index',
+
+	/**
+	 * EXTREMA requests the extrema (min/max) aggregation.
+	 *
+	 * TODO: Explain better, how this works on the backend
+	 */
+	EXTEMA = 'extrema',
 }
 
 /**
  * AggregationOperation defines the operation to use.
+ *
+ * See also the Java source of the backend:
+ * [Aggregation.java](https://git.psi.ch/sf_daq/ch.psi.daq.domain/blob/master/src/main/java/ch/psi/daq/domain/query/operation/Aggregation.java)
  */
 export enum AggregationOperation {
 	/**
-	 * MAX aggregates to the maximum value.
+	 * COUNT aggregates to the number of items.
+	 * `count([1, 2, 3]) = 3`
 	 */
+	COUNT = 'count',
+
+	/**
+	 * KURTOSIS
+	 * @see https://en.wikipedia.org/wiki/Kurtosis
+	 */
+	KURTOSIS = 'kurtosis',
+
+	/**
+	 * MAX aggregates to the maximum value.
+	 * `max([1, 2, 3]) = 3`
+	 */
+
 	MAX = 'max',
 
 	/**
-	 * MEAN aggregates to the mean value.
+	 * MEAN aggregates to the (arithmetic) mean value.
+	 * `mean([1, 2, 3]) = 2`
 	 */
 	MEAN = 'mean',
 
 	/**
-	 * MIN aggregates to the min value.
+	 * MIN aggregates to the minimum value.
+	 * `min([1, 2, 3]) = 1`
 	 */
 	MIN = 'min',
+
+	/**
+	 * SKEWNESS
+	 * @see https://en.wikipedia.org/wiki/Skewness
+	 */
+	SKEWNESS = 'skewness',
+
+	/**
+	 * STDDEV aggregates to the standard deviation.
+	 * @see https://en.wikipedia.org/wiki/Standard_deviation
+	 */
+	STDDEV = 'stddev',
+
+	/**
+	 * SUM aggregates to the sum.
+	 * `sum([1, 2, 3]) = 6`
+	 */
+	SUM = 'sum',
+
+	/**
+	 * VARIANCE aggregates to the variance.
+	 * @see https://en.wikipedia.org/wiki/Variance
+	 */
+	VARIANCE = 'variance',
 }
 
-// ### TODO: do this properly
-export type Extrema = any
+/**
+ * Request extrema aggregation.
+ *
+ * See also the Java source of the backend:
+ * [Extrema.java](https://git.psi.ch/sf_daq/ch.psi.daq.domain/blob/master/src/main/java/ch/psi/daq/domain/query/operation/Extrema.java)
+ */
+export enum Extrema {
+	/**
+	 * MAX_VALUE requests the global maximum value.
+	 */
+	MAX_VALUE = 'maxValue',
+
+	/**
+	 * MIN_VALUE requests the global minimum value.
+	 */
+	MIN_VALUE = 'minValue',
+}
