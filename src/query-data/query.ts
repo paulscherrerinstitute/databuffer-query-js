@@ -25,6 +25,12 @@ export interface QueryRequest {
 	range: QueryRange
 
 	/**
+	 * ordering allows to ask for a specific ordering.
+	 * **Default** is [[Ordering.ASC]].
+	 */
+	ordering?: Ordering
+
+	/**
 	 * configFields holds the config fields that are being requested.
 	 * **Default** is not to query config fields.
 	 */
