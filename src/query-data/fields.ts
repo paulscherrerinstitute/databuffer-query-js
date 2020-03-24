@@ -1,8 +1,31 @@
 /**
  * ConfigFields are fields being retrieved about the configuiration
  * of a [[Channel]] on a backend.
+ *
+ * See also the Java source of the backend:
+ * https://git.psi.ch/sf_daq/ch.psi.daq.domain/blob/master/src/main/java/ch/psi/daq/domain/query/operation/ConfigField.java
  */
 export enum ConfigFields {
+	/**
+	 * BACKEND holds the name of the backend where the event originated.
+	 */
+	BACKEND = 'backend',
+
+	/**
+	 * The bin size (for internal storage setup)
+	 */
+	BIN_SIZE = 'binSize',
+
+	/**
+	 * CHANNEL holds the name of the channel on the backend.
+	 */
+	CHANNEL = 'channel',
+
+	/**
+	 * The description of the channel
+	 */
+	DESCRIPTION = 'description',
+
 	/**
 	 * GLOBAL_DATE holds the global time as a ISO8601 date time string.
 	 */
@@ -40,6 +63,28 @@ export enum ConfigFields {
 	IOC_SECONDS = 'iocSeconds',
 
 	/**
+	 * The key space (for internal storage setup)
+	 */
+	KEYSPACE = 'keyspace',
+
+	/**
+	 * The modulo of the channel (only applicable for bsread channels)
+	 */
+	MODULO = 'modulo',
+
+	/**
+	 * The offset of the channel (only applicable for bsread channels)
+	 */
+	OFFSET = 'offset',
+
+	/**
+	 * The precision of the channel values. Only applicable for floating point numbers (e.g. -3 for
+	 * 1234.56789 = -3 = 10^-3 = 0.001 and thus 1234.567 or 2 for 1234.56789 = 10^2 = 100 and thus
+	 * 1200.0
+	 */
+	PRECISION = 'precision',
+
+	/**
 	 * PULSE_ID holds the numeric ID of a pulse.
 	 *
 	 * @remarks
@@ -50,9 +95,33 @@ export enum ConfigFields {
 	PULSE_ID = 'pulseId',
 
 	/**
-	 * TODO
+	 * SHAPE provides information about the data in the [[value]] of the
+	 * [[DataPoint]]. It will be:
+	 * - `[1]` for scalars
+	 * - `[num]` for waveforms
+	 * - `[numX, numY]` for 2D images
+	 */
+	SHAPE = 'shape',
+
+	/**
+	 * The source (e.g. server address) of the channel.
+	 */
+	SOURCE = 'source',
+
+	/**
+	 * The split count (for internal storage setup)
+	 */
+	SPLIT_COUNT = 'splitCount',
+
+	/**
+	 * TYPE holds the underlying data type e.g. `int32`.
 	 */
 	TYPE = 'type',
+
+	/**
+	 * The unit of the channel values.
+	 */
+	UNIT = 'unit',
 }
 
 /**
