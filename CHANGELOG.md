@@ -1,21 +1,30 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+## [0.4.0](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.3.0...v0.4.0) (2020-03-27)
 
-## [Unreleased]
 
-### Added
+### ⚠ BREAKING CHANGES
 
-- add ordering to data query request
+* Rename `DataPoint` to `Event` so it is more in line
+with the overall terminology used with the databuffer's backend.
+If you specifically used the type name in your code, then you will need
+to change it accordingly. If you only used type inference, you don't
+need to change your code.
+* Rename enums to make the code easier to read:
 
-### Changed
+- `ConfigFields` becomes `ConfigField`.
+- `EventFields` becomes `EventField`.
 
-- **BREAKING CHANGE**: rename type `DataPoint` to `Event`
-- rename enums to singular
-- improve doc comments
+### Features
+
+* add ordering to data query request ([6f44722](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/6f44722a68a8d1ddd25f3708417db74a0186e021))
+* add typings for data query response with aggregation ([5af089f](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/5af089fe3496393a82bb79b913b1fc2301b61a65)), closes [#8](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/8)
+
+
+* rename DataPoint to Event ([b48b6e1](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/b48b6e1cd85552249920c65761ebc7687420206a))
+* rename enums to singular ([07b1de3](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/07b1de3ea42e4dc01820d00b5401b3c4f05af9ab))
 
 ## [0.3.0] - 2020-03-24
 
