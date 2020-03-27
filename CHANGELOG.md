@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.4.1](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.4.0...v0.4.1) (2020-03-27)
+
+
+### Features
+
+* add missing fields to interface `Event` ([a097bb7](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/a097bb7ff9e4b53190a2028e2620c2e4cf1ec5a7)), closes [#9](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/9)
+
 ## [0.4.0](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.3.0...v0.4.0) (2020-03-27)
 
 
