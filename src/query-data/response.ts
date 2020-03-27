@@ -1,5 +1,6 @@
 import { Channel } from '../channel'
 import { EventField } from './fields'
+import { AggregationResult } from './aggregation'
 
 /**
  * QueryResponse defines the structure of the response from the API.
@@ -37,10 +38,12 @@ export interface Event {
 	[EventField.IOC_MILLIS]?: number
 	[EventField.IOC_SECONDS]?: number
 	[EventField.PULSE_ID]?: number
-	[EventField.VALUE]?: number[]
-
-	/** shape defines the number of elements in the value field */
-	shape?: number[]
+	[EventField.SHAPE]?: number[]
+	[EventField.VALUE]?:
+		| number
+		| number[]
+		| AggregationResult
+		| AggregationResult[]
 }
 
 export interface QueryResponseFormat {

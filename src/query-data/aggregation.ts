@@ -1,5 +1,5 @@
 /**
- * AggregationSpecification defines the details of the aggregation.
+ * AggregationSpecification defines the details of the aggregation query.
  *
  * See also the Java source of the backend:
  * [AggregationDescriptor.java](https://git.psi.ch/sf_daq/ch.psi.daq.domain/blob/master/src/main/java/ch/psi/daq/domain/query/operation/AggregationDescriptor.java)
@@ -150,4 +150,21 @@ export enum Extrema {
 	 * MIN_VALUE requests the global minimum value.
 	 */
 	MIN_VALUE = 'minValue',
+}
+
+/**
+ * AggregationResult holds the possible fields that can be present
+ * in [[Event.value]], if the request was using aggregation (i.e.
+ * it included an [[AggregationSpecification]]).
+ */
+export interface AggregationResult {
+	[AggregationOperation.COUNT]?: number
+	[AggregationOperation.KURTOSIS]?: number
+	[AggregationOperation.MAX]?: number
+	[AggregationOperation.MEAN]?: number
+	[AggregationOperation.MIN]?: number
+	[AggregationOperation.SKEWNESS]?: number
+	[AggregationOperation.STDDEV]?: number
+	[AggregationOperation.SUM]?: number
+	[AggregationOperation.VARIANCE]?: number
 }
