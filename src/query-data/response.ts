@@ -18,18 +18,18 @@ export interface QueryResponseItem {
 	/**
 	 * data contains the data retrieved from the API.
 	 */
-	data: DataPoint[]
+	data: Event[]
 }
 
 /**
- * DataPoint defines a single point of data returned for a [[Channel]]
+ * Event defines a single point of data returned for a [[Channel]]
  * within a [[QueryResponseItem]].
  *
  * @remarks
  * Which fields are present depends on which fields were requested in
  * the original data query.
  */
-export interface DataPoint {
+export interface Event {
 	[EventField.GLOBAL_DATE]?: string
 	[EventField.GLOBAL_MILLIS]?: number
 	[EventField.GLOBAL_SECONDS]?: number
