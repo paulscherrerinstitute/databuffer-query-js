@@ -31,6 +31,9 @@ export interface QueryResponseItem {
  * the original data query.
  */
 export interface Event {
+	[EventField.BACKEND]?: string
+	[EventField.CHANNEL]?: string
+	[EventField.EVENT_COUNT]?: number
 	[EventField.GLOBAL_DATE]?: string
 	[EventField.GLOBAL_MILLIS]?: number
 	[EventField.GLOBAL_SECONDS]?: number
@@ -38,7 +41,10 @@ export interface Event {
 	[EventField.IOC_MILLIS]?: number
 	[EventField.IOC_SECONDS]?: number
 	[EventField.PULSE_ID]?: number
+	[EventField.SEVERITY]?: number
 	[EventField.SHAPE]?: number[]
+	[EventField.STATUS]?: number
+	[EventField.TRANSFORMED_VALUE]?: any // ### TODO: specify more correctly
 	[EventField.VALUE]?:
 		| number
 		| number[]

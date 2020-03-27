@@ -1,0 +1,229 @@
+# This file contains data queries to check out the backend's responses.
+#
+# It's really just a helper for tinkering and getting the requests and
+# responses right for when the documentation of the API leaves room for
+# interpretation.
+
+###
+
+# non-aggregated query or a SCALAR
+
+POST https://data-api.psi.ch/sf/query
+Content-Type: application/json
+
+{
+    "channels": [
+        {
+            "backend": "sf-archiverappliance",
+            "name": "SINEG01-CMON-DIA0091:CURRENT-5"
+        }
+    ],
+    "range": {
+        "startSeconds": 1585296203.363,
+        "endSeconds": 1585296205.363
+    },
+		"configFields": [
+			"shape"
+		],
+    "eventFields": [
+        "globalMillis",
+        "pulseId",
+				"shape",
+        "value",
+        "eventCount"
+    ]
+}
+
+###
+
+# non-aggregated query of an ARRAY (WAVEFORM)
+
+POST https://data-api.psi.ch/sf/query
+Content-Type: application/json
+
+{
+    "channels": [
+        {
+            "backend": "sf-databuffer",
+            "name": "SINEG01-RCIR-PUP10:SIG-AMPLT"
+        }
+    ],
+    "range": {
+        "startSeconds": 1585296203.363,
+        "endSeconds": 1585296203.463
+    },
+		"configFields": [
+			"shape"
+		],
+    "eventFields": [
+        "eventCount",
+        "globalMillis",
+        "pulseId",
+        "shape",
+				"severity",
+				"status",
+				"type",
+        "value"
+    ]
+}
+
+###
+
+# aggregated query, without actual aggregation (eventCount === 1)
+
+POST https://data-api.psi.ch/sf/query
+Content-Type: application/json
+
+{
+    "channels": [
+        {
+            "backend": "sf-archiverappliance",
+            "name": "SINEG01-CMON-DIA0091:CURRENT-5"
+        }
+    ],
+    "range": {
+        "startSeconds": 1585296203.363,
+        "endSeconds": 1585296205.363
+    },
+		"configFields": [
+			"shape"
+		],
+    "eventFields": [
+        "globalMillis",
+        "pulseId",
+        "value",
+				"shape",
+        "eventCount"
+    ],
+    "aggregation": {
+        "aggregationType": "value",
+        "aggregations": [
+            "max",
+            "mean",
+            "min"
+        ],
+        "nrOfBins": 512
+    }
+}
+
+###
+
+# aggregated query, with aggregation (eventCount > 1)
+
+POST https://data-api.psi.ch/sf/query
+Content-Type: application/json
+
+{
+    "channels": [
+        {
+            "backend": "sf-archiverappliance",
+            "name": "SINEG01-CMON-DIA0091:CURRENT-5"
+        }
+    ],
+    "range": {
+        "startSeconds": 1585290203.363,
+        "endSeconds": 1585296205.363
+    },
+		"configFields": [
+			"shape"
+		],
+    "eventFields": [
+        "eventCount",
+        "globalMillis",
+        "pulseId",
+        "shape",
+				"severity",
+				"status",
+				"type",
+        "value"
+    ],
+    "aggregation": {
+        "aggregationType": "value",
+        "aggregations": [
+            "max",
+            "mean",
+            "min"
+        ],
+        "nrOfBins": 512
+    }
+}
+
+
+###
+
+# value aggregated query of an ARRAY (WAVEFORM)
+
+POST https://data-api.psi.ch/sf/query
+Content-Type: application/json
+
+{
+    "channels": [
+        {
+            "backend": "sf-databuffer",
+            "name": "SINEG01-RCIR-PUP10:SIG-AMPLT"
+        }
+    ],
+    "range": {
+        "startSeconds": 1585296203.363,
+        "endSeconds": 1585296203.463
+    },
+		"configFields": [
+			"shape"
+		],
+    "eventFields": [
+        "globalMillis",
+        "pulseId",
+        "value",
+				"shape",
+        "eventCount"
+    ],
+    "aggregation": {
+        "aggregationType": "value",
+        "aggregations": [
+            "max",
+            "mean",
+            "min"
+        ],
+        "nrOfBins": 512
+    }
+}
+
+###
+
+# index aggregated query of an ARRAY (WAVEFORM)
+# without actual aggregation (eventCount === 1)
+
+POST https://data-api.psi.ch/sf/query
+Content-Type: application/json
+
+{
+    "channels": [
+        {
+            "backend": "sf-databuffer",
+            "name": "SINEG01-RCIR-PUP10:SIG-AMPLT"
+        }
+    ],
+    "range": {
+        "startSeconds": 1585296203.363,
+        "endSeconds": 1585296203.463
+    },
+		"configFields": [
+			"shape"
+		],
+    "eventFields": [
+        "globalMillis",
+        "pulseId",
+        "value",
+				"shape",
+        "eventCount"
+    ],
+    "aggregation": {
+        "aggregationType": "index",
+        "aggregations": [
+            "max",
+            "mean",
+            "min"
+        ],
+        "nrOfBins": 512
+    }
+}
