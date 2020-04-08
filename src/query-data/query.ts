@@ -1,15 +1,14 @@
-import { Channel } from '../channel'
 import { post } from '../http-request'
-
-import { QueryRange } from './range'
-import { AggregationSpecification } from './aggregation'
-import { QueryResponse, QueryResponseFormat } from './response'
-import { ConfigField, EventField } from './fields'
+import type { Channel } from '../channel'
+import type { DataQueryRange } from './range'
+import type { AggregationSpecification } from './aggregation'
+import type { DataResponse, DataResponseFormat } from './response'
+import type { ConfigField, EventField } from './fields'
 
 /**
- * QueryRequest defines a query for data points
+ * DataQuery defines a query for data points
  */
-export interface QueryRequest {
+export interface DataQuery {
 	/**
 	 * channels defines, which [[Channel]]s will be queried for data.
 	 *
@@ -22,7 +21,7 @@ export interface QueryRequest {
 	channels: Array<string> | Array<Channel>
 
 	/** range defines the amount of data to be retrieved (X axis) */
-	range: QueryRange
+	range: DataQueryRange
 
 	/**
 	 * ordering allows to ask for a specific ordering.
@@ -52,7 +51,7 @@ export interface QueryRequest {
 	 * response instructs the API server to format the response in a certain way.
 	 * **Default** is JSON, without compression, following redirects.
 	 */
-	response?: QueryResponseFormat
+	response?: DataResponseFormat
 
 	// ### TODO: Value mapping
 
@@ -78,17 +77,17 @@ export enum Ordering {
 }
 
 /**
- * Query the REST API for data.
+ * queryData queries the REST API for data.
  *
  * @param baseUrl URL of the REST interfaces startpoint for routing
- * @param options defines the query to be run
+ * @param query defines the query to be run
  *
  * @returns A `Promise` with the results from the query.
  */
 export const queryData = (
 	baseUrl: string,
-	options: QueryRequest
-): Promise<QueryResponse> => {
+	query: DataQuery
+): Promise<DataResponse> => {
 	const endpoint = `${baseUrl}/query`
-	return post(endpoint, options) as Promise<QueryResponse>
+	return post(endpoint, query) as Promise<DataResponse>
 }

@@ -3,14 +3,14 @@ import { EventField } from './fields'
 import { AggregationResult } from './aggregation'
 
 /**
- * QueryResponse defines the structure of the response from the API.
+ * DataResponse defines the structure of the response from the API.
  */
-export type QueryResponse = QueryResponseItem[]
+export type DataResponse = DataResponseItem[]
 
 /**
- * QueryResponseItem defines the structure of a single item of [[QueryResponse]].
+ * DataResponseItem defines the structure of a single item of [[DataResponse]].
  */
-export interface QueryResponseItem {
+export interface DataResponseItem {
 	/**
 	 * channel identifies, which channel the [[data]] belongs to.
 	 */
@@ -24,7 +24,7 @@ export interface QueryResponseItem {
 
 /**
  * Event defines a single point of data returned for a [[Channel]]
- * within a [[QueryResponseItem]].
+ * within a [[DataResponseItem]].
  *
  * @remarks
  * Which fields are present depends on which fields were requested in
@@ -52,18 +52,18 @@ export interface Event {
 		| AggregationResult[]
 }
 
-export interface QueryResponseFormat {
+export interface DataResponseFormat {
 	/**
 	 * format requests a specific format for the response data.
-	 * **Default** is [[QueryResponseFormatSpecifier.JSON]].
+	 * **Default** is [[DataResponseFormatSpecifier.JSON]].
 	 */
-	format?: QueryResponseFormatType
+	format?: DataResponseFormatType
 
 	/**
 	 * compression requests a compressed response.
-	 * **Default** is [[QueryResponseCompression.NONE]].
+	 * **Default** is [[DataResponseCompression.NONE]].
 	 */
-	compression?: QueryResponseCompression
+	compression?: DataResponseCompression
 
 	/**
 	 * allowRedirect defines if the API server can redirect this query
@@ -74,9 +74,9 @@ export interface QueryResponseFormat {
 }
 
 /**
- * QueryResponseFormatType defines the data format of the response.
+ * DataResponseFormatType defines the data format of the response.
  */
-export enum QueryResponseFormatType {
+export enum DataResponseFormatType {
 	/**
 	 * JSON requests the response in JSON format.
 	 */
@@ -92,9 +92,9 @@ export enum QueryResponseFormatType {
 }
 
 /**
- * QueryResponseCompression defines if
+ * DataResponseCompression defines if
  */
-export enum QueryResponseCompression {
+export enum DataResponseCompression {
 	NONE = 'none',
 	GZIP = 'gzip',
 }

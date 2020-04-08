@@ -2,7 +2,8 @@ import { describe, it } from 'mocha'
 import { expect } from 'chai'
 import sinon from 'sinon'
 
-import { QueryRest } from '../src'
+import { QueryRest } from './index'
+import type { DataQuery, ChannelNamesQuery } from './index'
 import * as qChNames from '../src/query-channel-names'
 import * as qData from '../src/query-data'
 
@@ -36,7 +37,7 @@ describe('class QueryRest', () => {
 
 		it('passes queryOptions', async () => {
 			const qr = new QueryRest(DEFAULT_URL)
-			const options: qChNames.QueryOptions = {
+			const query: ChannelNamesQuery = {
 				backends: ['backend1', 'backend2'],
 				ordering: qChNames.Ordering.ASC,
 				regex: '^sineg',
@@ -44,10 +45,10 @@ describe('class QueryRest', () => {
 			}
 			const fake = sinon.fake()
 			sinon.replace(qChNames, 'queryChannelNames', fake)
-			await qr.queryChannelNames(options)
+			await qr.queryChannelNames(query)
 			expect(fake.callCount).to.equal(1)
 			expect(fake.args[0]).to.be.an('array').with.length(2)
-			expect(fake.args[0][1]).to.deep.equal(options)
+			expect(fake.args[0][1]).to.deep.equal(query)
 		})
 	})
 
@@ -56,7 +57,7 @@ describe('class QueryRest', () => {
 			const fake = sinon.fake()
 			sinon.replace(qData, 'queryData', fake)
 			const qr = new QueryRest(DEFAULT_URL)
-			await qr.queryData({} as qData.QueryRequest)
+			await qr.queryData({} as DataQuery)
 			expect(fake.callCount).to.equal(1)
 			expect(fake.args[0][0]).to.equal(DEFAULT_URL)
 		})
@@ -65,7 +66,7 @@ describe('class QueryRest', () => {
 			const fake = sinon.fake()
 			sinon.replace(qData, 'queryData', fake)
 			const qr = new QueryRest(DEFAULT_URL)
-			const options: qData.QueryRequest = {
+			const query: DataQuery = {
 				channels: [
 					{ backend: 'backend1', name: 'chan1' },
 					{ backend: 'backend2', name: 'chan2' },
@@ -81,9 +82,9 @@ describe('class QueryRest', () => {
 					endPulseId: 2,
 				},
 			}
-			await qr.queryData(options)
+			await qr.queryData(query)
 			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][1]).to.deep.equal(options)
+			expect(fake.args[0][1]).to.deep.equal(query)
 		})
 	})
 })

@@ -1,5 +1,5 @@
 import { post } from '../http-request'
-import { QueryResponse } from './response'
+import { ChannelNamesResponse } from './response'
 
 /**
  * Ordering defines how the backend should order the results of a query.
@@ -16,9 +16,9 @@ export enum Ordering {
 }
 
 /**
- * QueryOptions defines a query for channel names.
+ * ChannelNamesQuery defines a query for channel names.
  */
-export interface QueryOptions {
+export interface ChannelNamesQuery {
 	/**
 	 * regex defines the search pattern used to filter channel names.
 	 *
@@ -48,20 +48,20 @@ export interface QueryOptions {
 }
 
 /**
- * Query the REST API for channel names.
+ * queryChannelNames queries the REST API for channel names.
  *
  * This function does the heavy lifting and actually sends out the request
  * and will return the resulting response through a `Promise`.
  *
  * @param baseUrl URL of the REST interfaces startpoint for routing
- * @param options defines the query to be run
+ * @param query defines the query to be run
  *
  * @returns A `Promise` with the results from the query.
  */
 export const queryChannelNames = (
 	baseUrl: string,
-	options: QueryOptions
-): Promise<QueryResponse> => {
+	query: ChannelNamesQuery
+): Promise<ChannelNamesResponse> => {
 	const endpoint = `${baseUrl}/channels`
-	return post(endpoint, options) as Promise<QueryResponse>
+	return post(endpoint, query) as Promise<ChannelNamesResponse>
 }

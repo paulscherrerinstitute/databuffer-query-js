@@ -1,17 +1,17 @@
 /**
- * QueryRange specifies the range (X axis) of data to query.
+ * DataQueryRange specifies the range (X axis) of data to query.
  * This can be either based on the pulse IDs (discrete integers)
  * or on date or timestamp values.
  */
-export type QueryRange =
-	| QueryRangeByPulse
-	| QueryRangeByDate
-	| QueryRangeByTimestamp
+export type DataQueryRange =
+	| DataQueryRangeByPulse
+	| DataQueryRangeByDate
+	| DataQueryRangeByTimestamp
 
 /**
- * QueryRangeBase specifies common fields for other [[QueryDataRange]] types.
+ * DataQueryRangeBase specifies common fields for other [[DataQueryRange]] types.
  */
-interface QueryRangeBase {
+interface DataQueryRangeBase {
 	/**
 	 * startInclusive defines, if the start value is inclusive.
 	 * **Default** is `true`.
@@ -40,10 +40,10 @@ interface QueryRangeBase {
 }
 
 /**
- * QueryRangeByPulse specifies the range (X axis) of data to query
+ * DataQueryRangeByPulse specifies the range (X axis) of data to query
  * using pulse IDs.
  */
-export interface QueryRangeByPulse extends QueryRangeBase {
+export interface DataQueryRangeByPulse extends DataQueryRangeBase {
 	/**
 	 * startPulseId defines the start of the query range.
 	 *
@@ -58,10 +58,10 @@ export interface QueryRangeByPulse extends QueryRangeBase {
 }
 
 /**
- * QueryRangeByDate specifies the range (X axis) of data to query
+ * DataQueryRangeByDate specifies the range (X axis) of data to query
  * using date time strings.
  */
-export interface QueryRangeByDate extends QueryRangeBase {
+export interface DataQueryRangeByDate extends DataQueryRangeBase {
 	/**
 	 * startDate defines the start of the query range.
 	 *
@@ -82,10 +82,10 @@ export interface QueryRangeByDate extends QueryRangeBase {
 }
 
 /**
- * QueryRangeByTime specifies the range (X axis) of data to query
+ * DataQueryRangeByTime specifies the range (X axis) of data to query
  * using timestamp values.
  */
-export interface QueryRangeByTimestamp extends QueryRangeBase {
+export interface DataQueryRangeByTimestamp extends DataQueryRangeBase {
 	/**
 	 * startSeconds defines the start of the query range.
 	 *

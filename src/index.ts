@@ -4,8 +4,15 @@
  * See https://git.psi.ch/sf_daq/ch.psi.daq.databuffer/blob/master/ch.psi.daq.queryrest/Readme.md
  */
 
-import * as qChNames from './query-channel-names'
-import * as qData from './query-data'
+import { queryChannelNames } from './query-channel-names'
+import type {
+	ChannelNamesQuery,
+	ChannelNamesResponse,
+} from './query-channel-names'
+import { queryData } from './query-data'
+import type { DataQuery, DataResponse } from './query-data'
+
+export type { DataQuery, DataResponse, ChannelNamesQuery, ChannelNamesResponse }
 
 /**
  * QueryRest provides access to the `ch.psi.daq.queryrest` API.
@@ -33,21 +40,21 @@ export class QueryRest {
 	}
 
 	/**
-	 * queryChannelNames see [[qChNames.queryChannelNames]].
+	 * queryChannelNames see [[queryChannelNames]].
 	 *
-	 * @param options defines the query
+	 * @param query defines the query
 	 */
 	async queryChannelNames(
-		options: qChNames.QueryOptions
-	): Promise<qChNames.QueryResponse> {
-		return qChNames.queryChannelNames(this.url, options)
+		query: ChannelNamesQuery
+	): Promise<ChannelNamesResponse> {
+		return queryChannelNames(this.url, query)
 	}
 	/**
-	 * queryData see [[qData.queryData]].
+	 * queryData see [[queryData]].
 	 *
-	 * @param options defines the query
+	 * @param query defines the query
 	 */
-	async queryData(options: qData.QueryRequest): Promise<qData.QueryResponse> {
-		return qData.queryData(this.url, options)
+	async queryData(query: DataQuery): Promise<DataResponse> {
+		return queryData(this.url, query)
 	}
 }

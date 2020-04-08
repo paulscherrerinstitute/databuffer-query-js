@@ -2,19 +2,14 @@ import { describe, it } from 'mocha'
 import { expect } from 'chai'
 import sinon from 'sinon'
 
-import {
-	queryData,
-	QueryRequest,
-	QueryResponse,
-	ConfigField,
-	EventField,
-} from './index'
+import { queryData, ConfigField, EventField } from './index'
+import type { DataQuery, DataResponse } from './index'
 
 import * as httpRequest from '../http-request'
 
 const DEFAULT_URL = 'http://localhost:8080'
 
-const MINIMAL_OPTIONS: QueryRequest = {
+const MINIMAL_OPTIONS: DataQuery = {
 	channels: [],
 	configFields: [],
 	eventFields: [],
@@ -41,7 +36,7 @@ describe('query-data', () => {
 	it('sends the queryOptions in the body of the request', async () => {
 		const fake = sinon.fake()
 		sinon.replace(httpRequest, 'post', fake)
-		const options: QueryRequest = {
+		const options: DataQuery = {
 			channels: [
 				{ backend: 'backend1', name: 'chan1' },
 				{ backend: 'backend2', name: 'chan2' },
@@ -63,7 +58,7 @@ describe('query-data', () => {
 	})
 
 	it('parses the response correctly', async () => {
-		const fakeAnswer: QueryResponse = [
+		const fakeAnswer: DataResponse = [
 			{
 				channel: { backend: 'backend1', name: 'chan11' },
 				data: [

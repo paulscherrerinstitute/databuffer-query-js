@@ -1,12 +1,12 @@
 /**
- * QueryResponse defines the structure of the response from the API.
+ * ChannelNamesResponse defines the structure of the response from the API.
  */
-export type QueryResponse = Array<QueryResponseItem>
+export type ChannelNamesResponse = Array<ChannelNamesResponseItem>
 
 /**
- * QueryResponseItem defines the structure of a single item of [[QueryResponse]].
+ * ChannelNamesResponseItem defines the structure of a single item of [[ChannelNamesResponse]].
  */
-export interface QueryResponseItem {
+export interface ChannelNamesResponseItem {
 	/**
 	 * backend is the name of the backend where the [[channels]] are
 	 * available.
