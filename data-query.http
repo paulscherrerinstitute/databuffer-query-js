@@ -4,11 +4,13 @@
 # responses right for when the documentation of the API leaves room for
 # interpretation.
 
+@baseurl = https://data-api.psi.ch/sf
+
 ###
 
 # non-aggregated query or a SCALAR
 
-POST https://data-api.psi.ch/sf/query
+POST {{baseurl}}/query
 Content-Type: application/json
 
 {
@@ -38,7 +40,7 @@ Content-Type: application/json
 
 # non-aggregated query of an ARRAY (WAVEFORM)
 
-POST https://data-api.psi.ch/sf/query
+POST {{baseurl}}/query
 Content-Type: application/json
 
 {
@@ -71,7 +73,7 @@ Content-Type: application/json
 
 # aggregated query, without actual aggregation (eventCount === 1)
 
-POST https://data-api.psi.ch/sf/query
+POST {{baseurl}}/query
 Content-Type: application/json
 
 {
@@ -110,7 +112,7 @@ Content-Type: application/json
 
 # aggregated query, with aggregation (eventCount > 1)
 
-POST https://data-api.psi.ch/sf/query
+POST {{baseurl}}/query
 Content-Type: application/json
 
 {
@@ -153,7 +155,7 @@ Content-Type: application/json
 
 # value aggregated query of an ARRAY (WAVEFORM)
 
-POST https://data-api.psi.ch/sf/query
+POST {{baseurl}}/query
 Content-Type: application/json
 
 {
@@ -193,7 +195,7 @@ Content-Type: application/json
 # index aggregated query of an ARRAY (WAVEFORM)
 # without actual aggregation (eventCount === 1)
 
-POST https://data-api.psi.ch/sf/query
+POST {{baseurl}}/query
 Content-Type: application/json
 
 {

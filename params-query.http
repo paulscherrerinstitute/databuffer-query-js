@@ -1,0 +1,49 @@
+# This file contains data queries to check out the backend's responses.
+#
+# It's really just a helper for tinkering and getting the requests and
+# responses right for when the documentation of the API leaves room for
+# interpretation.
+
+@baseurl=https://data-api.psi.ch/sf
+
+###
+
+# Query for the available aggregations
+
+GET {{baseurl}}/params/aggregations
+
+###
+
+# Query for the available (data providing) backends
+
+GET {{baseurl}}/params/backends
+
+###
+
+# Query for the available compression formats
+
+GET {{baseurl}}/params/compression
+
+###
+
+# Query for the available config fields
+
+GET {{baseurl}}/params/configfields
+
+###
+
+# Query for the available event fields
+
+GET {{baseurl}}/params/eventfields
+
+###
+
+# Query for the available ordering parameter values
+
+GET {{baseurl}}/params/ordering
+
+###
+
+# Query for the available response formats
+
+GET {{baseurl}}/params/responseformat

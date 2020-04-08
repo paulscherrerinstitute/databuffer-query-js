@@ -44,10 +44,8 @@ export const fetchWithTimeout = async (
 			}, timeoutMs)
 		})
 
-		const response = (await Promise.race([
-			timerPromise,
-			fetch(url, options),
-		])) as Response
+		const response =
+			(await Promise.race([timerPromise, fetch(url, options)])) as Response
 		clearTimeout(timerId)
 		if (!response.ok)
 			throw new Error(`${response.status}: ${response.statusText}`)
@@ -80,5 +78,26 @@ export const post = async <T>(url: string, body?: T) => {
 		method: 'POST',
 	}
 	if (body !== undefined) options.body = JSON.stringify(body)
+	return fetchWithTimeout(url, options)
+}
+
+/**
+ * get sends a HTTP GET request to a URL.
+ *
+ * It is a convenience function that does the following:
+ *
+ * - Automatically uses [[COMMON_FETCH_OPTIONS]]
+ * - Checks if the Response was a success (`reponse.ok`)
+ * - Extracts the payload of the response (`response.json()`)
+ * - Adds a type cast for the payload's response
+ *
+ * @param url The URL to send the POST request to
+ * @param body The *optional* payload to be sent with the request
+ */
+export const get = async (url: string) => {
+	const options: RequestInit = {
+		...COMMON_FETCH_OPTIONS,
+		method: 'GET',
+	}
 	return fetchWithTimeout(url, options)
 }
