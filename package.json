@@ -15,7 +15,7 @@
 	"types": "index.d.ts",
 	"scripts": {
 		"build": "tsc --build tsconfig.json",
-		"clean": "rm -rf dist/",
+		"clean": "rm -rf dist/ coverage/ .nyc_output/",
 		"docs": "typedoc --mode modules --ignoreCompilerErrors --excludePrivate --out docs/api ./src",
 		"lint:eslint": "eslint 'src/**/*.ts' 'test/**/*.ts'",
 		"lint:prettier": "prettier 'src/**/*.ts' 'test/**/*.ts' --list-different || ( echo '↑↑↑  these files are not well formatted  ↑↑↑' && exit 1 )",
