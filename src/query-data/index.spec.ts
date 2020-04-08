@@ -1,13 +1,16 @@
+import { describe, it } from 'mocha'
+import { expect } from 'chai'
+import sinon from 'sinon'
+
 import {
 	queryData,
 	QueryRequest,
 	QueryResponse,
 	ConfigField,
 	EventField,
-} from '../src/query-data'
-import { post } from '../src/http-request'
+} from './index'
 
-jest.mock('../src/http-request')
+import * as httpRequest from '../http-request'
 
 const DEFAULT_URL = 'http://localhost:8080'
 
@@ -22,16 +25,22 @@ const MINIMAL_OPTIONS: QueryRequest = {
 }
 
 describe('query-data', () => {
+	afterEach(() => {
+		sinon.restore()
+	})
+
 	it('sends out a POST request to the right URL', async () => {
-		expect.hasAssertions()
+		const fake = sinon.fake()
+		sinon.replace(httpRequest, 'post', fake)
 		const expectedUrl = `${DEFAULT_URL}/query`
 		await queryData(DEFAULT_URL, MINIMAL_OPTIONS)
-		expect(post).toHaveBeenCalledTimes(1)
-		expect((post as jest.Mock).mock.calls[0][0]).toEqual(expectedUrl)
+		expect(fake.callCount).to.equal(1)
+		expect(fake.args[0][0]).to.equal(expectedUrl)
 	})
 
 	it('sends the queryOptions in the body of the request', async () => {
-		expect.hasAssertions()
+		const fake = sinon.fake()
+		sinon.replace(httpRequest, 'post', fake)
 		const options: QueryRequest = {
 			channels: [
 				{ backend: 'backend1', name: 'chan1' },
@@ -49,12 +58,11 @@ describe('query-data', () => {
 			},
 		}
 		await queryData(DEFAULT_URL, options)
-		expect(post).toHaveBeenCalledTimes(1)
-		expect((post as jest.Mock).mock.calls[0][1]).toEqual(options)
+		expect(fake.callCount).to.equal(1)
+		expect(fake.args[0][1]).to.deep.equal(options)
 	})
 
 	it('parses the response correctly', async () => {
-		expect.hasAssertions()
 		const fakeAnswer: QueryResponse = [
 			{
 				channel: { backend: 'backend1', name: 'chan11' },
@@ -75,9 +83,10 @@ describe('query-data', () => {
 				],
 			},
 		]
-		;(post as jest.Mock).mockReturnValue(fakeAnswer)
+		const fake = sinon.fake.resolves(fakeAnswer)
+		sinon.replace(httpRequest, 'post', fake)
 		const response = await queryData(DEFAULT_URL, MINIMAL_OPTIONS)
-		expect(response).toHaveLength(2)
-		expect(response).toEqual(fakeAnswer)
+		expect(response).to.be.an('array').with.length(2)
+		expect(response).to.deep.equal(fakeAnswer)
 	})
 })

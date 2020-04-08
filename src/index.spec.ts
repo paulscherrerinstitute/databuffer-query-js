@@ -1,37 +1,40 @@
+import { describe, it } from 'mocha'
+import { expect } from 'chai'
+import sinon from 'sinon'
+
 import { QueryRest } from '../src'
 import * as qChNames from '../src/query-channel-names'
 import * as qData from '../src/query-data'
 
-jest.mock('../src/query-channel-names')
-jest.mock('../src/query-data')
-
 const DEFAULT_URL = 'http://localhost:8080'
 
 describe('class QueryRest', () => {
+	afterEach(() => {
+		sinon.restore()
+	})
+
 	it('uses the URL of the constructor', () => {
 		const qr = new QueryRest(DEFAULT_URL)
-		expect(qr.url).toEqual(DEFAULT_URL)
+		expect(qr.url).to.equal(DEFAULT_URL)
 	})
 
 	it('can set the URL as a property', () => {
 		const qr = new QueryRest(DEFAULT_URL)
 		qr.url = 'http://api.example.com'
-		expect(qr.url).toEqual('http://api.example.com')
+		expect(qr.url).to.equal('http://api.example.com')
 	})
 
 	describe('queryChannelNames', () => {
 		it('uses this.url', async () => {
-			expect.hasAssertions()
+			const fake = sinon.fake()
+			sinon.replace(qChNames, 'queryChannelNames', fake)
 			const qr = new QueryRest(DEFAULT_URL)
 			await qr.queryChannelNames({})
-			expect(qChNames.queryChannelNames).toBeCalledTimes(1)
-			expect(
-				(qChNames.queryChannelNames as jest.Mock).mock.calls[0][0]
-			).toEqual(DEFAULT_URL)
+			expect(fake.callCount).to.equal(1)
+			expect(fake.args[0][0]).to.equal(DEFAULT_URL)
 		})
 
 		it('passes queryOptions', async () => {
-			expect.hasAssertions()
 			const qr = new QueryRest(DEFAULT_URL)
 			const options: qChNames.QueryOptions = {
 				backends: ['backend1', 'backend2'],
@@ -39,27 +42,28 @@ describe('class QueryRest', () => {
 				regex: '^sineg',
 				reload: true,
 			}
+			const fake = sinon.fake()
+			sinon.replace(qChNames, 'queryChannelNames', fake)
 			await qr.queryChannelNames(options)
-			expect(qChNames.queryChannelNames).toBeCalledTimes(1)
-			expect(
-				(qChNames.queryChannelNames as jest.Mock).mock.calls[0][1]
-			).toEqual(options)
+			expect(fake.callCount).to.equal(1)
+			expect(fake.args[0]).to.be.an('array').with.length(2)
+			expect(fake.args[0][1]).to.deep.equal(options)
 		})
 	})
 
 	describe('queryData', () => {
 		it('uses this.url', async () => {
-			expect.hasAssertions()
+			const fake = sinon.fake()
+			sinon.replace(qData, 'queryData', fake)
 			const qr = new QueryRest(DEFAULT_URL)
-			await qr.queryChannelNames({})
-			expect(qChNames.queryChannelNames).toBeCalledTimes(1)
-			expect(
-				(qChNames.queryChannelNames as jest.Mock).mock.calls[0][0]
-			).toEqual(DEFAULT_URL)
+			await qr.queryData({} as qData.QueryRequest)
+			expect(fake.callCount).to.equal(1)
+			expect(fake.args[0][0]).to.equal(DEFAULT_URL)
 		})
 
 		it('passes queryRequest', async () => {
-			expect.hasAssertions()
+			const fake = sinon.fake()
+			sinon.replace(qData, 'queryData', fake)
 			const qr = new QueryRest(DEFAULT_URL)
 			const options: qData.QueryRequest = {
 				channels: [
@@ -78,8 +82,8 @@ describe('class QueryRest', () => {
 				},
 			}
 			await qr.queryData(options)
-			expect(qData.queryData).toBeCalledTimes(1)
-			expect((qData.queryData as jest.Mock).mock.calls[0][1]).toEqual(options)
+			expect(fake.callCount).to.equal(1)
+			expect(fake.args[0][1]).to.deep.equal(options)
 		})
 	})
 })
