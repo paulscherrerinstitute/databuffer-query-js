@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.6.0](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.5.0...v0.6.0) (2020-04-09)
+
+### Features
+
+- support querying channel configurations ([9c96fb3](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/9c96fb34162dc10b424ae899b8403775d2dd9a95)), closes [#13](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/13)
+
 ## [0.5.0](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.4.1...v0.5.0) (2020-04-08)
 
 ### ⚠ BREAKING CHANGES
