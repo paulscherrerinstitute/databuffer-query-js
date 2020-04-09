@@ -4,6 +4,11 @@
  * See https://git.psi.ch/sf_daq/ch.psi.daq.databuffer/blob/master/ch.psi.daq.queryrest/Readme.md
  */
 
+import { queryChannelConfigs } from './query-channel-configs'
+import type {
+	ChannelConfigsQuery,
+	ChannelConfigsResponse,
+} from './query-channel-configs'
 import { queryChannelNames } from './query-channel-names'
 import type {
 	ChannelNamesQuery,
@@ -12,7 +17,14 @@ import type {
 import { queryData } from './query-data'
 import type { DataQuery, DataResponse } from './query-data'
 
-export type { DataQuery, DataResponse, ChannelNamesQuery, ChannelNamesResponse }
+export type {
+	DataQuery,
+	DataResponse,
+	ChannelNamesQuery,
+	ChannelNamesResponse,
+	ChannelConfigsQuery,
+	ChannelConfigsResponse,
+}
 
 /**
  * QueryRest provides access to the `ch.psi.daq.queryrest` API.
@@ -40,6 +52,17 @@ export class QueryRest {
 	}
 
 	/**
+	 * queryChannelConfigs see [[queryChannelConfigs]].
+	 *
+	 * @param query defines the query
+	 */
+	async queryChannelConfigs(
+		query: ChannelConfigsQuery
+	): Promise<ChannelConfigsResponse> {
+		return queryChannelConfigs(this.url, query)
+	}
+
+	/**
 	 * queryChannelNames see [[queryChannelNames]].
 	 *
 	 * @param query defines the query
@@ -49,6 +72,7 @@ export class QueryRest {
 	): Promise<ChannelNamesResponse> {
 		return queryChannelNames(this.url, query)
 	}
+
 	/**
 	 * queryData see [[queryData]].
 	 *

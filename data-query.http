@@ -1,4 +1,4 @@
-# This file contains data queries to check out the backend's responses.
+# This file contains queries to check out the backend's responses.
 #
 # It's really just a helper for tinkering and getting the requests and
 # responses right for when the documentation of the API leaves room for

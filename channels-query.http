@@ -1,0 +1,53 @@
+# This file contains queries to check out the backend's responses.
+#
+# It's really just a helper for tinkering and getting the requests and
+# responses right for when the documentation of the API leaves room for
+# interpretation.
+
+@host=data-api.psi.ch
+@baseurl=https://{{host}}/all
+
+###
+
+# Query channel names for GLS typical channels
+
+POST {{baseurl}}/channels
+Content-Type: application/json
+
+{
+	"regex":"WBGB.*EB80.*M01"
+}
+
+###
+
+# Query channel configs for GLS typical channels
+
+POST {{baseurl}}/channels/config
+Content-Type: application/json
+
+{
+	"regex":"WBGB.*EB80.*M01"
+}
+
+###
+
+# Query channel names for SF typical channels
+
+POST {{baseurl}}/channels
+Content-Type: application/json
+
+{
+	"regex":"SINEG.*CURRENT"
+}
+
+###
+
+# Query channel configs for SF typical channels
+
+POST {{baseurl}}/channels/config
+Content-Type: application/json
+
+{
+	"regex":"SINEG.*CURRENT"
+}
+

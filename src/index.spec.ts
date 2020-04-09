@@ -3,7 +3,8 @@ import { expect } from 'chai'
 import sinon from 'sinon'
 
 import { QueryRest } from './index'
-import type { DataQuery, ChannelNamesQuery } from './index'
+import type { DataQuery, ChannelNamesQuery, ChannelConfigsQuery } from './index'
+import * as qChConfigs from '../src/query-channel-configs'
 import * as qChNames from '../src/query-channel-names'
 import * as qData from '../src/query-data'
 
@@ -23,6 +24,33 @@ describe('class QueryRest', () => {
 		const qr = new QueryRest(DEFAULT_URL)
 		qr.url = 'http://api.example.com'
 		expect(qr.url).to.equal('http://api.example.com')
+	})
+
+	describe('queryChannelConfigs', () => {
+		it('uses this.url', async () => {
+			const fake = sinon.fake()
+			sinon.replace(qChConfigs, 'queryChannelConfigs', fake)
+			const qr = new QueryRest(DEFAULT_URL)
+			await qr.queryChannelConfigs({})
+			expect(fake.callCount).to.equal(1)
+			expect(fake.args[0][0]).to.equal(DEFAULT_URL)
+		})
+
+		it('passes queryOptions', async () => {
+			const qr = new QueryRest(DEFAULT_URL)
+			const query: ChannelConfigsQuery = {
+				backends: ['backend1', 'backend2'],
+				ordering: qChConfigs.Ordering.ASC,
+				regex: '^sineg',
+				sourceRegex: 'LLRF',
+			}
+			const fake = sinon.fake()
+			sinon.replace(qChConfigs, 'queryChannelConfigs', fake)
+			await qr.queryChannelConfigs(query)
+			expect(fake.callCount).to.equal(1)
+			expect(fake.args[0]).to.be.an('array').with.length(2)
+			expect(fake.args[0][1]).to.deep.equal(query)
+		})
 	})
 
 	describe('queryChannelNames', () => {
