@@ -27,11 +27,13 @@ export const COMMON_FETCH_OPTIONS: RequestInit = {
  * @param url The URL to send the POST request to.
  * @param options Request options (headers, payload, etc.).
  * @param timeoutMs The timeout (in milliseconds) to wait for a response.
+ * @param returnRaw If `true` returns the raw response object. If `false` (default) returns `response.json()`.
  */
 export const fetchWithTimeout = async (
 	url: string,
 	options: RequestInit,
-	timeoutMs: number = 30000
+	timeoutMs: number = 30000,
+	returnRaw = false
 ): Promise<unknown> => {
 	let timerId
 	const abortController = new AbortController()
@@ -49,6 +51,7 @@ export const fetchWithTimeout = async (
 		clearTimeout(timerId)
 		if (!response.ok)
 			throw new Error(`${response.status}: ${response.statusText}`)
+		if (returnRaw) return response
 		return await response.json()
 	} catch (err) {
 		clearTimeout(timerId)
@@ -69,16 +72,17 @@ export const fetchWithTimeout = async (
  *
  * @param url The URL to send the POST request to
  * @param body The *optional* payload to be sent with the request
+ * @param returnRaw If `true` returns the raw response object. If `false` (default) returns `response.json()`.
  *
  * @typeParam T The type of the request body
  */
-export const post = async <T>(url: string, body?: T) => {
+export const post = async <T>(url: string, body?: T, returnRaw = false) => {
 	const options: RequestInit = {
 		...COMMON_FETCH_OPTIONS,
 		method: 'POST',
 	}
 	if (body !== undefined) options.body = JSON.stringify(body)
-	return fetchWithTimeout(url, options)
+	return fetchWithTimeout(url, options, undefined, returnRaw)
 }
 
 /**
@@ -92,12 +96,12 @@ export const post = async <T>(url: string, body?: T) => {
  * - Adds a type cast for the payload's response
  *
  * @param url The URL to send the POST request to
- * @param body The *optional* payload to be sent with the request
+ * @param returnRaw If `true` returns the raw response object. If `false` (default) returns `response.json()`.
  */
-export const get = async (url: string) => {
+export const get = async (url: string, returnRaw = false) => {
 	const options: RequestInit = {
 		...COMMON_FETCH_OPTIONS,
 		method: 'GET',
 	}
-	return fetchWithTimeout(url, options)
+	return fetchWithTimeout(url, options, undefined, returnRaw)
 }

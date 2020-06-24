@@ -14,7 +14,7 @@ import type {
 	ChannelNamesQuery,
 	ChannelNamesResponse,
 } from './query-channel-names'
-import { queryData } from './query-data'
+import { queryData, queryDataRaw } from './query-data'
 import type { DataQuery, DataResponse } from './query-data'
 
 export type {
@@ -80,5 +80,14 @@ export class QueryRest {
 	 */
 	async queryData(query: DataQuery): Promise<DataResponse> {
 		return queryData(this.url, query)
+	}
+
+	/**
+	 * queryDataRaw see [[queryDataRaw]].
+	 *
+	 * @param query defines the query
+	 */
+	async queryDataRaw(query: DataQuery): Promise<Response> {
+		return queryDataRaw(this.url, query)
 	}
 }

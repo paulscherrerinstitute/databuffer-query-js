@@ -91,3 +91,20 @@ export const queryData = (
 	const endpoint = `${baseUrl}/query`
 	return post(endpoint, query) as Promise<DataResponse>
 }
+
+/**
+ * queryDataRaw queries the REST API for data and returns the `Response`
+ * from the request.
+ *
+ * @param baseUrl URL of the REST interfaces startpoint for routing
+ * @param query defines the query to be run
+ *
+ * @returns A `Promise` with the unprocessed fetch response.
+ */
+export const queryDataRaw = (
+	baseUrl: string,
+	query: DataQuery
+): Promise<Response> => {
+	const endpoint = `${baseUrl}/query`
+	return post(endpoint, query, true) as Promise<Response>
+}
