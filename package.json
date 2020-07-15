@@ -16,6 +16,7 @@
 	"scripts": {
 		"build": "tsc --build tsconfig.json",
 		"clean": "rm -rf dist/ coverage/ .nyc_output/",
+		"deps:update-to-latest": "npm-check-updates -u && npm install",
 		"docs": "typedoc --mode modules --ignoreCompilerErrors --excludePrivate --out docs/api ./src",
 		"lint:eslint": "eslint 'src/**/*.ts' 'test/**/*.ts'",
 		"lint:prettier": "prettier 'src/**/*.ts' 'test/**/*.ts' --list-different || ( echo '↑↑↑  these files are not well formatted  ↑↑↑' && exit 1 )",
@@ -47,6 +48,7 @@
 		"jsonlint": "^1.6.3",
 		"lint-staged": "^10.1.2",
 		"mocha": "^7.1.1",
+		"npm-check-updates": "^7.0.1",
 		"nyc": "^15.0.1",
 		"prettier": "^2.0.3",
 		"sinon": "^9.0.1",
