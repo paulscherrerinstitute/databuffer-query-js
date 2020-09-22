@@ -1,5 +1,5 @@
 {
-	"name": "@psi/databuffer-query-js",
+	"name": "@paulscherrerinstitute/databuffer-query-js",
 	"description": "JS client API for ch.psi.daq.queryrest",
 	"version": "0.6.1",
 	"author": "Paul Scherrer Institute, Switzerland",
@@ -9,7 +9,7 @@
 		"url": "https://github.com/paulscherrerinstitute/databuffer-query-js.git"
 	},
 	"publishConfig": {
-		"registry": "http://npm.psi.ch"
+		"registry": "https://npm.pkg.github.com"
 	},
 	"module": "index.js",
 	"types": "index.d.ts",
@@ -25,7 +25,8 @@
 		"mypublish:pre": "npm run clean && npm run build && cp README.md package.json ./dist/",
 		"mypublish": "npm run mypublish:pre && npm publish ./dist",
 		"mypack": "npm run mypublish:pre && npm pack ./dist",
-		"release": "standard-version",
+		"release": "standard-version --dry-run",
+		"release:prod": "standard-version",
 		"test": "mocha",
 		"test:coverage": "nyc mocha"
 	},
