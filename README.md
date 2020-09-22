@@ -10,7 +10,7 @@ The npm package for _databuffer-query-js_ is hosted on [GitHub packages](https:/
 @paulscherrerinstitute:registry=npm.pkg.github.com
 ```
 
-Now you can add _databuffer-qurey-js_ to your project as a dependency:
+Now you can add _databuffer-query-js_ to your project as a dependency:
 
 ```sh
 npm install --save '@paulscherrerinstitute/databuffer-query-js'
