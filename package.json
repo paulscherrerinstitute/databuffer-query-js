@@ -1,7 +1,7 @@
 {
 	"name": "@paulscherrerinstitute/databuffer-query-js",
 	"description": "JS client API for ch.psi.daq.queryrest",
-	"version": "0.6.3",
+	"version": "0.6.4",
 	"author": "Paul Scherrer Institute, Switzerland",
 	"license": "GPL-3.0-or-later",
 	"repository": {
