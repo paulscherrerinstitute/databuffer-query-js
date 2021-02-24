@@ -16,6 +16,16 @@ import type {
 } from './query-channel-names'
 import { queryData, queryDataRaw } from './query-data'
 import type { DataQuery, DataResponse } from './query-data'
+import {
+	queryAggregations,
+	queryBackends,
+	queryCompression,
+	queryConfigFields,
+	queryEventFields,
+	queryOrdering,
+	queryResponseFormats,
+} from './query-parameters'
+import type { ParametersResponse } from './query-parameters'
 
 export type {
 	DataQuery,
@@ -24,6 +34,7 @@ export type {
 	ChannelNamesResponse,
 	ChannelConfigsQuery,
 	ChannelConfigsResponse,
+	ParametersResponse,
 }
 
 /**
@@ -52,6 +63,20 @@ export class QueryRest {
 	}
 
 	/**
+	 * queryAggregations see [[ queryBackends ]]
+	 */
+	async queryAggregations(): Promise<ParametersResponse> {
+		return queryAggregations(this.url)
+	}
+
+	/**
+	 * queryBackends see [[ queryBackends ]]
+	 */
+	async queryBackends(): Promise<ParametersResponse> {
+		return queryBackends(this.url)
+	}
+
+	/**
 	 * queryChannelConfigs see [[queryChannelConfigs]].
 	 *
 	 * @param query defines the query
@@ -74,6 +99,20 @@ export class QueryRest {
 	}
 
 	/**
+	 * queryCompression see [[ queryBackends ]]
+	 */
+	async queryCompression(): Promise<ParametersResponse> {
+		return queryCompression(this.url)
+	}
+
+	/**
+	 * queryConfigFields see [[ queryBackends ]]
+	 */
+	async queryConfigFields(): Promise<ParametersResponse> {
+		return queryConfigFields(this.url)
+	}
+
+	/**
 	 * queryData see [[queryData]].
 	 *
 	 * @param query defines the query
@@ -89,5 +128,26 @@ export class QueryRest {
 	 */
 	async queryDataRaw(query: DataQuery): Promise<Response> {
 		return queryDataRaw(this.url, query)
+	}
+
+	/**
+	 * queryEventFields see [[ queryBackends ]]
+	 */
+	async queryEventFields(): Promise<ParametersResponse> {
+		return queryEventFields(this.url)
+	}
+
+	/**
+	 * queryOrdering see [[ queryBackends ]]
+	 */
+	async queryOrdering(): Promise<ParametersResponse> {
+		return queryOrdering(this.url)
+	}
+
+	/**
+	 * queryResponseFormats see [[ queryBackends ]]
+	 */
+	async queryResponseFormats(): Promise<ParametersResponse> {
+		return queryResponseFormats(this.url)
 	}
 }
