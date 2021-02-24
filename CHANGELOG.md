@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.5](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.6.4...v0.6.5) (2021-02-24)
+
+
+### Features
+
+* add parameters queries on QueryRest class ([6cb6df5](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/6cb6df5960d9ec855459b52d91d4952173ee785d)), closes [#18](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/18)
+
 ### [0.6.4](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.6.3...v0.6.4) (2020-09-22)
 
 - Release / tag to force publishing to GitHub packages, see [#16](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/16)
