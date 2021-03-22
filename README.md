@@ -40,5 +40,5 @@ npm run docs
     - Update version in `package-lock.json`
     - Update `CHANGELOG.md`
     - Commit changes and tag them
-  - Push the commits and tag: `npm push --follow-tags origin master`
+  - Push the commits and tag: `git push --follow-tags origin master`
   - GitHub actions will publish the package
