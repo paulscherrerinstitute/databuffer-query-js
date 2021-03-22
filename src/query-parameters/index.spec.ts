@@ -17,7 +17,7 @@ import * as httpRequest from '../http-request'
 
 const DEFAULT_URL = 'http://localhost:8080'
 
-describe('module paramters-query', () => {
+describe('module parameters-query', () => {
 	afterEach(() => {
 		sinon.restore()
 	})
