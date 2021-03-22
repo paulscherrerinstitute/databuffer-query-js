@@ -4,6 +4,7 @@ import type { DataQueryRange } from './range'
 import type { AggregationSpecification } from './aggregation'
 import type { DataResponse, DataResponseFormat } from './response'
 import type { ConfigField, EventField } from './fields'
+import { MappingSpecification } from './mapping'
 
 /**
  * DataQuery defines a query for data points
@@ -53,7 +54,10 @@ export interface DataQuery {
 	 */
 	response?: DataResponseFormat
 
-	// ### TODO: Value mapping
+	/**
+	 * mapping activates a table-like alignment of the response
+	 */
+	mapping?: MappingSpecification
 
 	// ### TODO: Value transformations
 }
