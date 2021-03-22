@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.6](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.6.5...v0.6.6) (2021-03-22)
+
+
+### Features
+
+* add support for value mapping ([3d0856f](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/3d0856f9342a1c19139fd24126f84686bde4032b)), closes [#19](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/19)
+
 ### [0.6.5](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.6.4...v0.6.5) (2021-02-24)
 
 
