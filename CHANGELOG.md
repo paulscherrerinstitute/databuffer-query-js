@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.6.7](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.6.6...v0.6.7) (2021-03-22)
+
+
+### Bug Fixes
+
+* add missing re-export of mapping module ([6f8b227](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/6f8b227ced6c1cf5f1fe66206c3721f9dd751ace))
+
 ### [0.6.6](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.6.5...v0.6.6) (2021-03-22)
 
 
