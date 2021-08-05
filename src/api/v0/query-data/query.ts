@@ -1,4 +1,4 @@
-import { post } from '../http-request'
+import { post } from '../../../http-request'
 import type { Channel } from '../channel'
 import type { DataQueryRange } from './range'
 import type { AggregationSpecification } from './aggregation'

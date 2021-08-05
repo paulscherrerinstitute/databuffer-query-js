@@ -1,4 +1,4 @@
-import { get } from '../http-request'
+import { get } from '../../../http-request'
 import type { ParametersResponse } from './parameters-response'
 
 /**

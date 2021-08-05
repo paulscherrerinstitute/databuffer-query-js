@@ -5,7 +5,7 @@ import sinon from 'sinon'
 import { queryChannelConfigs, Ordering } from './index'
 import type { ChannelConfigsQuery, ChannelConfigsResponse } from './index'
 
-import * as httpRequest from '../http-request'
+import * as httpRequest from '../../../http-request'
 
 const DEFAULT_URL = 'http://localhost:8080'
 

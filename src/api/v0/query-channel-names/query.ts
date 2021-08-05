@@ -1,4 +1,4 @@
-import { post } from '../http-request'
+import { post } from '../../../http-request'
 import { ChannelNamesResponse } from './response'
 
 /**

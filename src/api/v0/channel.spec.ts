@@ -1,12 +1,7 @@
 import { describe, it } from 'mocha'
 import { expect } from 'chai'
 
-import {
-	Channel,
-	BACKEND_SEPARATOR,
-	channelToId,
-	idToChannel,
-} from '../src/channel'
+import { Channel, BACKEND_SEPARATOR, channelToId, idToChannel } from './channel'
 
 describe('module Channel', () => {
 	describe('channelToId', () => {

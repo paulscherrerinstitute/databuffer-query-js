@@ -4,9 +4,9 @@ import sinon from 'sinon'
 
 import { QueryRest } from './index'
 import type { DataQuery, ChannelNamesQuery, ChannelConfigsQuery } from './index'
-import * as qChConfigs from '../src/query-channel-configs'
-import * as qChNames from '../src/query-channel-names'
-import * as qData from '../src/query-data'
+import * as qChConfigs from './query-channel-configs'
+import * as qChNames from './query-channel-names'
+import * as qData from './query-data'
 
 const DEFAULT_URL = 'http://localhost:8080'
 

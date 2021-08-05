@@ -5,7 +5,7 @@ import sinon from 'sinon'
 import { queryData, ConfigField, EventField } from './index'
 import type { DataQuery, DataResponse } from './index'
 
-import * as httpRequest from '../http-request'
+import * as httpRequest from '../../../http-request'
 
 const DEFAULT_URL = 'http://localhost:8080'
 

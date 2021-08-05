@@ -13,7 +13,7 @@ import {
 } from './index'
 import type { ParametersResponse } from './index'
 
-import * as httpRequest from '../http-request'
+import * as httpRequest from '../../../http-request'
 
 const DEFAULT_URL = 'http://localhost:8080'
 
