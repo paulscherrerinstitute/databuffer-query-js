@@ -46,8 +46,10 @@ export const fetchWithTimeout = async (
 			}, timeoutMs)
 		})
 
-		const response =
-			(await Promise.race([timerPromise, fetch(url, options)])) as Response
+		const response = (await Promise.race([
+			timerPromise,
+			fetch(url, options),
+		])) as Response
 		clearTimeout(timerId)
 		if (!response.ok)
 			throw new Error(`${response.status}: ${response.statusText}`)
@@ -104,4 +106,23 @@ export const get = async (url: string, returnRaw = false) => {
 		method: 'GET',
 	}
 	return fetchWithTimeout(url, options, undefined, returnRaw)
+}
+
+/**
+ * objectToGetParams transforms a JS object into a key value representation
+ * suitable to pass in the parameters part of a the URL of a HTTP GET request.
+ *
+ * Example:
+ *
+ *     const params = { name: 'John Doe', email: 'jdoe@example.org'};
+ *     const getParams = objectToGetParams(params);
+ *     // getParams === `name=John%20Doe&email=jdoe%40example.org`
+ */
+export const objectToGetParams = (obj: {
+	[k: string]: string | number
+}): string => {
+	const parts = Object.entries(obj).map(
+		entry => `${encodeURIComponent(entry[0])}=${encodeURIComponent(entry[1])}`
+	)
+	return parts.join('&')
 }
