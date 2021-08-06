@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.7.0](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.6.7...v0.7.0) (2021-08-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* import paths need to be adjusted
+
+### Features
+
+* implement data api v4 ([70787a2](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/70787a2eb775f7d88dea02f37ef586ad05d47678)), closes [#20](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/20)
+* validate api responses for api v4 ([98bcbd7](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/98bcbd7161544a7e422fc779866a6aa74d08684c)), closes [#17](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/17)
+
+
+* move api v0 code to api/v0/ ([449706f](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/449706fd85984645b33873dcb2de902c1be15a3e))
+
 ### [0.6.7](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.6.6...v0.6.7) (2021-03-22)
 
 
