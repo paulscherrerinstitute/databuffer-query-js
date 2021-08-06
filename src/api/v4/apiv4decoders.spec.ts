@@ -398,6 +398,36 @@ describe('module apiv4decoders', () => {
 			expect(() => binnedQueryResponseGuard(input)).to.throw()
 		})
 
+		it('rejects continueAt malformed', () => {
+			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
+			input.continueAt = '12.08.2021 12:34:56'
+			expect(() => binnedQueryResponseGuard(input)).to.throw()
+		})
+
+		it('accepts continueAt in ISO8601 UTC', () => {
+			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
+			input.continueAt = '2021-08-12T12:34:56.789Z'
+			const expectedTimestamp = Date.UTC(2021, 7, 12, 12, 34, 56, 789)
+			const result = binnedQueryResponseGuard(input)
+			expect(result.continueAt!.getTime()).to.equal(expectedTimestamp)
+		})
+
+		it('accepts continueAt in ISO8601 with timezone +hh:mm', () => {
+			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
+			input.continueAt = '2021-08-12T12:34:56.789+02:00'
+			const expectedTimestamp = Date.UTC(2021, 7, 12, 10, 34, 56, 789)
+			const result = binnedQueryResponseGuard(input)
+			expect(result.continueAt!.getTime()).to.equal(expectedTimestamp)
+		})
+
+		it('accepts continueAt in ISO8601 with timezone +hhmm', () => {
+			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
+			input.continueAt = '2021-08-12T12:34:56.789+0200'
+			const expectedTimestamp = Date.UTC(2021, 7, 12, 10, 34, 56, 789)
+			const result = binnedQueryResponseGuard(input)
+			expect(result.continueAt!.getTime()).to.equal(expectedTimestamp)
+		})
+
 		it('rejects counts missing', () => {
 			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
 			delete input.counts
