@@ -1,6 +1,9 @@
 # databuffer-query-js
 
-JS client library for [databuffer DAQ queryrest API](https://git.psi.ch/sf_daq/ch.psi.daq.databuffer/tree/master/ch.psi.daq.queryrest).
+JS client library for the Data API. The client library supports these API versions:
+
+- API v0 [(link to documentation)](https://git.psi.ch/sf_daq/ch.psi.daq.databuffer/tree/master/ch.psi.daq.queryrest)
+- API v4 [(link to documentation)](https://data-api.psi.ch/api/4/documentation/)
 
 ## Installation
 
