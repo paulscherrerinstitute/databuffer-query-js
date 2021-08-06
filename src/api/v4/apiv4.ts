@@ -1,4 +1,15 @@
 import { get, objectToGetParams } from '../../http-request'
+import {
+	backendsResponseGuard,
+	binnedQueryResponseGuard,
+	channelSearchResponseGuard,
+	eventsQueryResponseGuard,
+} from './apiv4decoders'
+
+/** response for a backends query operation */
+export type DataApiV4BackendsQueryResult = {
+	backends: string[]
+}
 
 /**
  * options for a channel search operation
@@ -54,6 +65,13 @@ export type DataApiV4EventsQueryOptions = {
 	endDate: string
 }
 
+/** the value in a datapoint / event can be
+ * - scalar number
+ * - 1D number array (waveform)
+ * - 2D number array (image)
+ */
+export type DataEventValueType = number | number[] | number[][]
+
 /** response for an events query operation */
 export type DataApiV4EventsQueryResult = {
 	/** indicates if the queried time range is finalised, i.e. no more data will be added. */
@@ -67,7 +85,7 @@ export type DataApiV4EventsQueryResult = {
 	/** nanoseconds offsets to `tsAnchor + tsMs[i]` */
 	tsNs: number[]
 	/** the values */
-	values: number[]
+	values: DataEventValueType[]
 }
 
 /** options for a binned query operation */
@@ -103,7 +121,7 @@ export type DataApiV4BinnedQueryResult = {
 	/** indicates if the queried time range is finalised, i.e. no more data will be added. */
 	finalisedRange?: boolean
 	/** use this for the next `begDate`. used for paging (indicates a partial result). */
-	continueAt?: string
+	continueAt?: Date
 	/** indicates how many more bins there will be to complete the data set. used for paging (indicates a partial result). */
 	missingBins?: number
 	/** seconds after UNIX epoch. serves as the base for the other offsets. */
@@ -113,13 +131,13 @@ export type DataApiV4BinnedQueryResult = {
 	/** nanoseconds offsets to `tsAnchor + tsMs[i]` */
 	tsNs: number[]
 	/** aggregated values: event counts */
-	counts: number[]
+	counts: (number | number[] | number[][])[]
 	/** aggregated values: averages */
-	avgs: number[]
+	avgs: DataEventValueType[]
 	/** aggregated values: minimums */
-	mins: number[]
+	mins: DataEventValueType[]
 	/** aggregated values: maximums */
-	maxs: number[]
+	maxs: DataEventValueType[]
 }
 
 /**
@@ -136,19 +154,15 @@ export class DataApiV4Client {
 	): Promise<DataApiV4ChannelSearchResult> {
 		const params = objectToGetParams(searchOptions)
 		const url = `${this.baseUrl}/search/channel?${params}`
-		const result = (await get(url)) as DataApiV4ChannelSearchResult
-		// TODO: validate result
-		// const _ = someDecoder(result) // throws, if not OK
-		return result
+		const result = await get(url)
+		return channelSearchResponseGuard(result)
 	}
 
 	/** list the backends */
-	public async listBackends(): Promise<string[]> {
+	public async listBackends(): Promise<DataApiV4BackendsQueryResult> {
 		const url = `${this.baseUrl}/backends`
-		const result = (await get(url)) as string[]
-		// TODO: validate result
-		// const _ = someDecoder(result) // throws, if not OK
-		return result
+		const result = await get(url)
+		return backendsResponseGuard(result)
 	}
 
 	/** query for data (raw) */
@@ -157,10 +171,8 @@ export class DataApiV4Client {
 	): Promise<DataApiV4EventsQueryResult> {
 		const params = objectToGetParams(queryOptions)
 		const url = `${this.baseUrl}/events?${params}`
-		const result = (await get(url)) as DataApiV4EventsQueryResult
-		// TODO: validate result
-		// const _ = someDecoder(result) // throws, if not OK
-		return result
+		const result = await get(url)
+		return eventsQueryResponseGuard(result)
 	}
 
 	/** query for data (binned) */
@@ -169,9 +181,7 @@ export class DataApiV4Client {
 	): Promise<DataApiV4BinnedQueryResult> {
 		const params = objectToGetParams(queryOptions)
 		const url = `${this.baseUrl}/binned?${params}`
-		const result = (await get(url)) as DataApiV4BinnedQueryResult
-		// TODO: validate result
-		// const _ = someDecoder(result) // throws, if not OK
-		return result
+		const result = await get(url)
+		return binnedQueryResponseGuard(result)
 	}
 }

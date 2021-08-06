@@ -19,7 +19,8 @@ describe('class DataApiV4Client', () => {
 
 	describe('method listBackends', () => {
 		it('sends a GET request to the right URL', async () => {
-			const fake = sinon.fake()
+			const fakeAnswer = { backends: ['a', 'b', 'c'] }
+			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httpRequest, 'get', fake)
 			const expectedUrl = `${BASE_URL}/backends`
 			await api.listBackends()
@@ -30,7 +31,8 @@ describe('class DataApiV4Client', () => {
 
 	describe('method searchChannels', () => {
 		it('sends a GET request to the right URL', async () => {
-			const fake = sinon.fake()
+			const fakeAnswer = { channels: [] }
+			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httpRequest, 'get', fake)
 			const expectedUrlStart = `${BASE_URL}/search/channel?`
 			await api.searchChannels({})
@@ -41,7 +43,8 @@ describe('class DataApiV4Client', () => {
 		})
 
 		it('adds searchOptions to the URL', async () => {
-			const fake = sinon.fake()
+			const fakeAnswer = { channels: [] }
+			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httpRequest, 'get', fake)
 			const expectedUrlStart = `${BASE_URL}/search/channel?`
 			await api.searchChannels({
@@ -63,7 +66,8 @@ describe('class DataApiV4Client', () => {
 
 	describe('method queryEvents', () => {
 		it('sends a GET request to the right URL', async () => {
-			const fake = sinon.fake()
+			const fakeAnswer = { tsAnchor: 0, tsMs: [], tsNs: [], values: [] }
+			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httpRequest, 'get', fake)
 			const expectedUrlStart = `${BASE_URL}/events?`
 			await api.queryEvents({
@@ -85,7 +89,16 @@ describe('class DataApiV4Client', () => {
 
 	describe('method queryBinned', () => {
 		it('sends a GET request to the right URL', async () => {
-			const fake = sinon.fake()
+			const fakeAnswer = {
+				tsAnchor: 0,
+				tsMs: [],
+				tsNs: [],
+				counts: [],
+				avgs: [],
+				mins: [],
+				maxs: [],
+			}
+			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httpRequest, 'get', fake)
 			const expectedUrlStart = `${BASE_URL}/binned?`
 			await api.queryBinned({
