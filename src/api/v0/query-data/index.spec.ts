@@ -1,6 +1,3 @@
-import { describe, it } from 'mocha'
-import sinon from 'sinon'
-
 import { queryData, ConfigField, EventField } from './index'
 import type { DataQuery, DataResponse } from './index'
 

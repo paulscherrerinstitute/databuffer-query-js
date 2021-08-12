@@ -1,6 +1,3 @@
-import { describe, it } from 'mocha'
-import sinon from 'sinon'
-
 import * as apiv4Module from './apiv4'
 import { DataApiV4Client } from './apiv4'
 

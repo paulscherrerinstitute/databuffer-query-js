@@ -1,6 +1,3 @@
-import { describe, it } from 'mocha'
-import sinon from 'sinon'
-
 import { queryChannelConfigs, Ordering } from './index'
 import type { ChannelConfigsQuery, ChannelConfigsResponse } from './index'
 

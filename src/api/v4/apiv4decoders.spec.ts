@@ -1,5 +1,3 @@
-import { describe, it } from 'mocha'
-
 import {
 	backendsResponseGuard,
 	binnedQueryResponseGuard,
@@ -35,7 +33,7 @@ describe('module apiv4decoders', () => {
 			}
 			const input = { ...expectedOutput, extra: 'that should not be there' }
 			const result = backendsResponseGuard(input)
-			expect(result).to.not.haveOwnProperty('extra')
+			expect(result).not.toHaveProperty('extra')
 			expect(result).toEqual(expectedOutput)
 		})
 	})
@@ -132,7 +130,7 @@ describe('module apiv4decoders', () => {
 			}
 			const input = { ...expectedOutput, extra: 'that should not be there' }
 			const result = channelSearchResponseGuard(input)
-			expect(result).to.not.haveOwnProperty('extra')
+			expect(result).not.toHaveProperty('extra')
 			expect(result).toEqual(expectedOutput)
 		})
 	})

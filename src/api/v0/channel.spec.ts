@@ -1,5 +1,3 @@
-import { describe, it } from 'mocha'
-
 import { Channel, BACKEND_SEPARATOR, channelToId, idToChannel } from './channel'
 
 describe('module Channel', () => {
@@ -25,10 +23,7 @@ describe('module Channel', () => {
 
 		it('creates an object with right structure', () => {
 			const ch = idToChannel('a/b')
-			expect(Object.getOwnPropertyNames(ch).sort()).toEqual([
-				'backend',
-				'name',
-			])
+			expect(Object.getOwnPropertyNames(ch).sort()).toEqual(['backend', 'name'])
 		})
 
 		it('throws error on empty string', () => {

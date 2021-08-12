@@ -1,6 +1,3 @@
-import { describe, it } from 'mocha'
-import sinon from 'sinon'
-
 import { QueryRest } from './index'
 import type { DataQuery, ChannelNamesQuery, ChannelConfigsQuery } from './index'
 import * as qChConfigs from './query-channel-configs'
