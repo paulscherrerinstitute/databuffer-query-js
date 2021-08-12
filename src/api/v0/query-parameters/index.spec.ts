@@ -1,5 +1,4 @@
 import { describe, it } from 'mocha'
-import { expect } from 'chai'
 import sinon from 'sinon'
 
 import {
@@ -28,8 +27,8 @@ describe('module parameters-query', () => {
 			sinon.replace(httputil, 'get', fake)
 			const expectedUrl = `${DEFAULT_URL}/params/aggregations`
 			await queryAggregations(DEFAULT_URL)
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.equal(expectedUrl)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBe(expectedUrl)
 		})
 
 		it('parses the response correctly', async () => {
@@ -37,8 +36,8 @@ describe('module parameters-query', () => {
 			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httputil, 'get', fake)
 			const response = await queryAggregations(DEFAULT_URL)
-			expect(response).to.be.an('array').with.length(3)
-			expect(response).to.deep.equal(fakeAnswer)
+			expect(response).to.be.an('array').toHaveLength(3)
+			expect(response).toEqual(fakeAnswer)
 		})
 	})
 
@@ -48,8 +47,8 @@ describe('module parameters-query', () => {
 			sinon.replace(httputil, 'get', fake)
 			const expectedUrl = `${DEFAULT_URL}/params/backends`
 			await queryBackends(DEFAULT_URL)
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.equal(expectedUrl)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBe(expectedUrl)
 		})
 
 		it('parses the response correctly', async () => {
@@ -61,8 +60,8 @@ describe('module parameters-query', () => {
 			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httputil, 'get', fake)
 			const response = await queryBackends(DEFAULT_URL)
-			expect(response).to.be.an('array').with.length(3)
-			expect(response).to.deep.equal(fakeAnswer)
+			expect(response).to.be.an('array').toHaveLength(3)
+			expect(response).toEqual(fakeAnswer)
 		})
 	})
 
@@ -72,8 +71,8 @@ describe('module parameters-query', () => {
 			sinon.replace(httputil, 'get', fake)
 			const expectedUrl = `${DEFAULT_URL}/params/compression`
 			await queryCompression(DEFAULT_URL)
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.equal(expectedUrl)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBe(expectedUrl)
 		})
 
 		it('parses the response correctly', async () => {
@@ -81,8 +80,8 @@ describe('module parameters-query', () => {
 			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httputil, 'get', fake)
 			const response = await queryCompression(DEFAULT_URL)
-			expect(response).to.be.an('array').with.length(2)
-			expect(response).to.deep.equal(fakeAnswer)
+			expect(response).to.be.an('array').toHaveLength(2)
+			expect(response).toEqual(fakeAnswer)
 		})
 	})
 
@@ -92,8 +91,8 @@ describe('module parameters-query', () => {
 			sinon.replace(httputil, 'get', fake)
 			const expectedUrl = `${DEFAULT_URL}/params/configfields`
 			await queryConfigFields(DEFAULT_URL)
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.equal(expectedUrl)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBe(expectedUrl)
 		})
 
 		it('parses the response correctly', async () => {
@@ -101,8 +100,8 @@ describe('module parameters-query', () => {
 			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httputil, 'get', fake)
 			const response = await queryConfigFields(DEFAULT_URL)
-			expect(response).to.be.an('array').with.length(3)
-			expect(response).to.deep.equal(fakeAnswer)
+			expect(response).to.be.an('array').toHaveLength(3)
+			expect(response).toEqual(fakeAnswer)
 		})
 	})
 
@@ -112,8 +111,8 @@ describe('module parameters-query', () => {
 			sinon.replace(httputil, 'get', fake)
 			const expectedUrl = `${DEFAULT_URL}/params/eventfields`
 			await queryEventFields(DEFAULT_URL)
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.equal(expectedUrl)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBe(expectedUrl)
 		})
 
 		it('parses the response correctly', async () => {
@@ -121,8 +120,8 @@ describe('module parameters-query', () => {
 			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httputil, 'get', fake)
 			const response = await queryEventFields(DEFAULT_URL)
-			expect(response).to.be.an('array').with.length(3)
-			expect(response).to.deep.equal(fakeAnswer)
+			expect(response).to.be.an('array').toHaveLength(3)
+			expect(response).toEqual(fakeAnswer)
 		})
 	})
 
@@ -132,8 +131,8 @@ describe('module parameters-query', () => {
 			sinon.replace(httputil, 'get', fake)
 			const expectedUrl = `${DEFAULT_URL}/params/ordering`
 			await queryOrdering(DEFAULT_URL)
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.equal(expectedUrl)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBe(expectedUrl)
 		})
 
 		it('parses the response correctly', async () => {
@@ -141,8 +140,8 @@ describe('module parameters-query', () => {
 			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httputil, 'get', fake)
 			const response = await queryOrdering(DEFAULT_URL)
-			expect(response).to.be.an('array').with.length(3)
-			expect(response).to.deep.equal(fakeAnswer)
+			expect(response).to.be.an('array').toHaveLength(3)
+			expect(response).toEqual(fakeAnswer)
 		})
 	})
 
@@ -152,8 +151,8 @@ describe('module parameters-query', () => {
 			sinon.replace(httputil, 'get', fake)
 			const expectedUrl = `${DEFAULT_URL}/params/responseformat`
 			await queryResponseFormats(DEFAULT_URL)
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.equal(expectedUrl)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBe(expectedUrl)
 		})
 
 		it('parses the response correctly', async () => {
@@ -161,8 +160,8 @@ describe('module parameters-query', () => {
 			const fake = sinon.fake.resolves(fakeAnswer)
 			sinon.replace(httputil, 'get', fake)
 			const response = await queryResponseFormats(DEFAULT_URL)
-			expect(response).to.be.an('array').with.length(3)
-			expect(response).to.deep.equal(fakeAnswer)
+			expect(response).to.be.an('array').toHaveLength(3)
+			expect(response).toEqual(fakeAnswer)
 		})
 	})
 })

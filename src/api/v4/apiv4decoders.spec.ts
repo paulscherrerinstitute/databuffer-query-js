@@ -1,5 +1,4 @@
 import { describe, it } from 'mocha'
-import { expect } from 'chai'
 
 import {
 	backendsResponseGuard,
@@ -15,11 +14,11 @@ describe('module apiv4decoders', () => {
 				backends: ['a', 'b', 'c'],
 			}
 			const result = backendsResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('rejects empty object', () => {
-			expect(() => backendsResponseGuard({})).to.throw()
+			expect(() => backendsResponseGuard({})).toThrowError()
 		})
 
 		it('rejects empty string in array', () => {
@@ -27,7 +26,7 @@ describe('module apiv4decoders', () => {
 				backendsResponseGuard({
 					backends: ['a', 'b', ''],
 				})
-			).to.throw()
+			).toThrowError()
 		})
 
 		it('removes extra keys in object', () => {
@@ -37,7 +36,7 @@ describe('module apiv4decoders', () => {
 			const input = { ...expectedOutput, extra: 'that should not be there' }
 			const result = backendsResponseGuard(input)
 			expect(result).to.not.haveOwnProperty('extra')
-			expect(result).to.deep.equal(expectedOutput)
+			expect(result).toEqual(expectedOutput)
 		})
 	})
 
@@ -47,7 +46,7 @@ describe('module apiv4decoders', () => {
 				channels: [],
 			}
 			const result = channelSearchResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('works with minimal result (good data)', () => {
@@ -55,7 +54,7 @@ describe('module apiv4decoders', () => {
 				channels: [{ name: 'a', backend: 'b' }],
 			}
 			const result = channelSearchResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('works with complete result (good data)', () => {
@@ -72,11 +71,11 @@ describe('module apiv4decoders', () => {
 				],
 			}
 			const result = channelSearchResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('rejects empty object', () => {
-			expect(() => channelSearchResponseGuard({})).to.throw()
+			expect(() => channelSearchResponseGuard({})).toThrowError()
 		})
 
 		it('rejects channels[].backend missing', () => {
@@ -84,7 +83,7 @@ describe('module apiv4decoders', () => {
 				channelSearchResponseGuard({
 					channels: [{ name: 'a' }],
 				})
-			).to.throw()
+			).toThrowError()
 		})
 
 		it('rejects channels[].backend empty', () => {
@@ -92,7 +91,7 @@ describe('module apiv4decoders', () => {
 				channelSearchResponseGuard({
 					channels: [{ name: 'a', backend: '' }],
 				})
-			).to.throw()
+			).toThrowError()
 		})
 
 		it('rejects channels[].name missing', () => {
@@ -100,7 +99,7 @@ describe('module apiv4decoders', () => {
 				channelSearchResponseGuard({
 					channels: [{ backend: 'b' }],
 				})
-			).to.throw()
+			).toThrowError()
 		})
 
 		it('rejects channels[].name empty', () => {
@@ -108,7 +107,7 @@ describe('module apiv4decoders', () => {
 				channelSearchResponseGuard({
 					channels: [{ name: '', backend: 'b' }],
 				})
-			).to.throw()
+			).toThrowError()
 		})
 
 		it('approves channels[].shape empty', () => {
@@ -116,7 +115,7 @@ describe('module apiv4decoders', () => {
 				channels: [{ name: 'a', backend: 'b', shape: [] }],
 			}
 			const result = channelSearchResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('rejects channels[].shape[] not integer', () => {
@@ -124,7 +123,7 @@ describe('module apiv4decoders', () => {
 				channelSearchResponseGuard({
 					channels: [{ name: '', backend: 'b', shape: [1.0] }],
 				})
-			).to.throw()
+			).toThrowError()
 		})
 
 		it('removes extra keys in object', () => {
@@ -134,7 +133,7 @@ describe('module apiv4decoders', () => {
 			const input = { ...expectedOutput, extra: 'that should not be there' }
 			const result = channelSearchResponseGuard(input)
 			expect(result).to.not.haveOwnProperty('extra')
-			expect(result).to.deep.equal(expectedOutput)
+			expect(result).toEqual(expectedOutput)
 		})
 	})
 
@@ -147,7 +146,7 @@ describe('module apiv4decoders', () => {
 				values: [],
 			}
 			const result = eventsQueryResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('works with complete result (good data, scalar)', () => {
@@ -158,7 +157,7 @@ describe('module apiv4decoders', () => {
 				values: [123.456, 234.567, 345.678],
 			}
 			const result = eventsQueryResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('works with complete result (good data, 1d array)', () => {
@@ -173,7 +172,7 @@ describe('module apiv4decoders', () => {
 				],
 			}
 			const result = eventsQueryResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('works with complete result (good data, 2d array)', () => {
@@ -197,11 +196,11 @@ describe('module apiv4decoders', () => {
 				],
 			}
 			const result = eventsQueryResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('rejects empty object', () => {
-			expect(() => eventsQueryResponseGuard({})).to.throw()
+			expect(() => eventsQueryResponseGuard({})).toThrowError()
 		})
 
 		it('rejects tsAnchor missing', () => {
@@ -212,7 +211,7 @@ describe('module apiv4decoders', () => {
 					tsNs: [200, 2000, 20000],
 					values: [123.456, 234.567, 345.678],
 				})
-			).to.throw()
+			).toThrowError()
 		})
 
 		it('rejects tsMs missing', () => {
@@ -223,7 +222,7 @@ describe('module apiv4decoders', () => {
 					tsNs: [200, 2000, 20000],
 					values: [123.456, 234.567, 345.678],
 				})
-			).to.throw()
+			).toThrowError()
 		})
 
 		it('rejects tsNs missing', () => {
@@ -234,7 +233,7 @@ describe('module apiv4decoders', () => {
 					// tsNs: [200, 2000, 20000],
 					values: [123.456, 234.567, 345.678],
 				})
-			).to.throw()
+			).toThrowError()
 		})
 
 		it('rejects values missing', () => {
@@ -245,7 +244,7 @@ describe('module apiv4decoders', () => {
 					tsNs: [200, 2000, 20000],
 					// values: [123.456, 234.567, 345.678],
 				})
-			).to.throw()
+			).toThrowError()
 		})
 	})
 
@@ -271,13 +270,13 @@ describe('module apiv4decoders', () => {
 				maxs: [],
 			}
 			const result = binnedQueryResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('works with complete result (good data, scalar)', () => {
 			const input = { ...MINIMAL_OK_DATA }
 			const result = binnedQueryResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('works with complete result (good data, 1d array)', () => {
@@ -307,7 +306,7 @@ describe('module apiv4decoders', () => {
 				],
 			}
 			const result = binnedQueryResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('works with complete result (good data, 2d array)', () => {
@@ -373,35 +372,35 @@ describe('module apiv4decoders', () => {
 				],
 			}
 			const result = binnedQueryResponseGuard(input)
-			expect(result).to.deep.equal(input)
+			expect(result).toEqual(input)
 		})
 
 		it('rejects empty object', () => {
-			expect(() => binnedQueryResponseGuard({})).to.throw()
+			expect(() => binnedQueryResponseGuard({})).toThrowError()
 		})
 
 		it('rejects tsAnchor missing', () => {
 			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
 			delete input.tsAnchor
-			expect(() => binnedQueryResponseGuard(input)).to.throw()
+			expect(() => binnedQueryResponseGuard(input)).toThrowError()
 		})
 
 		it('rejects tsMs missing', () => {
 			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
 			delete input.tsMs
-			expect(() => binnedQueryResponseGuard(input)).to.throw()
+			expect(() => binnedQueryResponseGuard(input)).toThrowError()
 		})
 
 		it('rejects tsNs missing', () => {
 			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
 			delete input.tsNs
-			expect(() => binnedQueryResponseGuard(input)).to.throw()
+			expect(() => binnedQueryResponseGuard(input)).toThrowError()
 		})
 
 		it('rejects continueAt malformed', () => {
 			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
 			input.continueAt = '12.08.2021 12:34:56'
-			expect(() => binnedQueryResponseGuard(input)).to.throw()
+			expect(() => binnedQueryResponseGuard(input)).toThrowError()
 		})
 
 		it('accepts continueAt in ISO8601 UTC', () => {
@@ -409,7 +408,7 @@ describe('module apiv4decoders', () => {
 			input.continueAt = '2021-08-12T12:34:56.789Z'
 			const expectedTimestamp = Date.UTC(2021, 7, 12, 12, 34, 56, 789)
 			const result = binnedQueryResponseGuard(input)
-			expect(result.continueAt!.getTime()).to.equal(expectedTimestamp)
+			expect(result.continueAt!.getTime()).toBe(expectedTimestamp)
 		})
 
 		it('accepts continueAt in ISO8601 with timezone +hh:mm', () => {
@@ -417,7 +416,7 @@ describe('module apiv4decoders', () => {
 			input.continueAt = '2021-08-12T12:34:56.789+02:00'
 			const expectedTimestamp = Date.UTC(2021, 7, 12, 10, 34, 56, 789)
 			const result = binnedQueryResponseGuard(input)
-			expect(result.continueAt!.getTime()).to.equal(expectedTimestamp)
+			expect(result.continueAt!.getTime()).toBe(expectedTimestamp)
 		})
 
 		it('accepts continueAt in ISO8601 with timezone +hhmm', () => {
@@ -425,31 +424,31 @@ describe('module apiv4decoders', () => {
 			input.continueAt = '2021-08-12T12:34:56.789+0200'
 			const expectedTimestamp = Date.UTC(2021, 7, 12, 10, 34, 56, 789)
 			const result = binnedQueryResponseGuard(input)
-			expect(result.continueAt!.getTime()).to.equal(expectedTimestamp)
+			expect(result.continueAt!.getTime()).toBe(expectedTimestamp)
 		})
 
 		it('rejects counts missing', () => {
 			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
 			delete input.counts
-			expect(() => binnedQueryResponseGuard(input)).to.throw()
+			expect(() => binnedQueryResponseGuard(input)).toThrowError()
 		})
 
 		it('rejects avgs missing', () => {
 			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
 			delete input.avgs
-			expect(() => binnedQueryResponseGuard(input)).to.throw()
+			expect(() => binnedQueryResponseGuard(input)).toThrowError()
 		})
 
 		it('rejects mins missing', () => {
 			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
 			delete input.mins
-			expect(() => binnedQueryResponseGuard(input)).to.throw()
+			expect(() => binnedQueryResponseGuard(input)).toThrowError()
 		})
 
 		it('rejects maxs missing', () => {
 			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
 			delete input.maxs
-			expect(() => binnedQueryResponseGuard(input)).to.throw()
+			expect(() => binnedQueryResponseGuard(input)).toThrowError()
 		})
 	})
 })

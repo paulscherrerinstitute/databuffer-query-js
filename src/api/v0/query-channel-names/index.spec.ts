@@ -1,5 +1,4 @@
 import { describe, it } from 'mocha'
-import { expect } from 'chai'
 import sinon from 'sinon'
 
 import { queryChannelNames, Ordering } from './index'
@@ -20,8 +19,8 @@ describe('query-channel-names', () => {
 		const expectedUrl = `${DEFAULT_URL}/channels`
 		const options = {}
 		await queryChannelNames(DEFAULT_URL, options)
-		expect(fake.callCount).to.equal(1)
-		expect(fake.args[0][0]).to.equal(expectedUrl)
+		expect(fake.callCount).toBe(1)
+		expect(fake.args[0][0]).toBe(expectedUrl)
 	})
 
 	it('sends the queryOptions in the body of the request', async () => {
@@ -34,8 +33,8 @@ describe('query-channel-names', () => {
 			reload: true,
 		}
 		await queryChannelNames(DEFAULT_URL, queryOptions)
-		expect(fake.callCount).to.equal(1)
-		expect(fake.args[0][1]).to.deep.equal(queryOptions)
+		expect(fake.callCount).toBe(1)
+		expect(fake.args[0][1]).toEqual(queryOptions)
 	})
 
 	it('parses the response correctly', async () => {
@@ -48,7 +47,7 @@ describe('query-channel-names', () => {
 		const fake = sinon.fake.resolves(fakeAnswer)
 		sinon.replace(httputil, 'post', fake)
 		const response = await queryChannelNames(DEFAULT_URL, options)
-		expect(response).to.be.an('array').with.length(3)
-		expect(response).to.deep.equal(fakeAnswer)
+		expect(response).to.be.an('array').toHaveLength(3)
+		expect(response).toEqual(fakeAnswer)
 	})
 })

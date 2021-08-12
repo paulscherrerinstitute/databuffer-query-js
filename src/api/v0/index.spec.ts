@@ -1,5 +1,4 @@
 import { describe, it } from 'mocha'
-import { expect } from 'chai'
 import sinon from 'sinon'
 
 import { QueryRest } from './index'
@@ -17,13 +16,13 @@ describe('class QueryRest', () => {
 
 	it('uses the URL of the constructor', () => {
 		const qr = new QueryRest(DEFAULT_URL)
-		expect(qr.url).to.equal(DEFAULT_URL)
+		expect(qr.url).toBe(DEFAULT_URL)
 	})
 
 	it('can set the URL as a property', () => {
 		const qr = new QueryRest(DEFAULT_URL)
 		qr.url = 'http://api.example.com'
-		expect(qr.url).to.equal('http://api.example.com')
+		expect(qr.url).toBe('http://api.example.com')
 	})
 
 	describe('queryChannelConfigs', () => {
@@ -32,8 +31,8 @@ describe('class QueryRest', () => {
 			sinon.replace(qChConfigs, 'queryChannelConfigs', fake)
 			const qr = new QueryRest(DEFAULT_URL)
 			await qr.queryChannelConfigs({})
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.equal(DEFAULT_URL)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBe(DEFAULT_URL)
 		})
 
 		it('passes queryOptions', async () => {
@@ -47,9 +46,9 @@ describe('class QueryRest', () => {
 			const fake = sinon.fake()
 			sinon.replace(qChConfigs, 'queryChannelConfigs', fake)
 			await qr.queryChannelConfigs(query)
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0]).to.be.an('array').with.length(2)
-			expect(fake.args[0][1]).to.deep.equal(query)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0]).to.be.an('array').toHaveLength(2)
+			expect(fake.args[0][1]).toEqual(query)
 		})
 	})
 
@@ -59,8 +58,8 @@ describe('class QueryRest', () => {
 			sinon.replace(qChNames, 'queryChannelNames', fake)
 			const qr = new QueryRest(DEFAULT_URL)
 			await qr.queryChannelNames({})
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.equal(DEFAULT_URL)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBe(DEFAULT_URL)
 		})
 
 		it('passes queryOptions', async () => {
@@ -74,9 +73,9 @@ describe('class QueryRest', () => {
 			const fake = sinon.fake()
 			sinon.replace(qChNames, 'queryChannelNames', fake)
 			await qr.queryChannelNames(query)
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0]).to.be.an('array').with.length(2)
-			expect(fake.args[0][1]).to.deep.equal(query)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0]).to.be.an('array').toHaveLength(2)
+			expect(fake.args[0][1]).toEqual(query)
 		})
 	})
 
@@ -86,8 +85,8 @@ describe('class QueryRest', () => {
 			sinon.replace(qData, 'queryData', fake)
 			const qr = new QueryRest(DEFAULT_URL)
 			await qr.queryData({} as DataQuery)
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.equal(DEFAULT_URL)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBe(DEFAULT_URL)
 		})
 
 		it('passes queryRequest', async () => {
@@ -111,8 +110,8 @@ describe('class QueryRest', () => {
 				},
 			}
 			await qr.queryData(query)
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][1]).to.deep.equal(query)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][1]).toEqual(query)
 		})
 	})
 })

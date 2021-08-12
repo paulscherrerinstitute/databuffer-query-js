@@ -1,5 +1,4 @@
 import { describe, it } from 'mocha'
-import { expect } from 'chai'
 import sinon from 'sinon'
 
 import * as apiv4Module from './apiv4'
@@ -24,8 +23,8 @@ describe('class DataApiV4Client', () => {
 			sinon.replace(apiv4Module, 'get', fake)
 			const expectedUrl = `${BASE_URL}/backends`
 			await api.listBackends()
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.equal(expectedUrl)
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBe(expectedUrl)
 		})
 	})
 
@@ -36,8 +35,8 @@ describe('class DataApiV4Client', () => {
 			sinon.replace(apiv4Module, 'get', fake)
 			const expectedUrlStart = `${BASE_URL}/search/channel?`
 			await api.searchChannels({})
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.be.a('string')
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBeInstanceOf('string')
 			const actualUrl = fake.args[0][0] as string
 			expect(actualUrl.startsWith(expectedUrlStart))
 		})
@@ -52,15 +51,15 @@ describe('class DataApiV4Client', () => {
 				sourceRegex: 'b',
 				descriptionRegex: 'c',
 			})
-			expect(fake.callCount).to.equal(1)
-			expect(fake.args[0][0]).to.be.a('string')
+			expect(fake.callCount).toBe(1)
+			expect(fake.args[0][0]).toBeInstanceOf('string')
 			const actualUrl = fake.args[0][0] as string
 			expect(actualUrl.startsWith(expectedUrlStart))
 			const u = new URL(actualUrl)
 			const searchParams = new URLSearchParams(u.search)
-			expect(searchParams.get('nameRegex')).to.equal('a')
-			expect(searchParams.get('sourceRegex')).to.equal('b')
-			expect(searchParams.get('descriptionRegex')).to.equal('c')
+			expect(searchParams.get('nameRegex')).toBe('a')
+			expect(searchParams.get('sourceRegex')).toBe('b')
+			expect(searchParams.get('descriptionRegex')).toBe('c')
 		})
 	})
 
@@ -80,10 +79,10 @@ describe('class DataApiV4Client', () => {
 			expect(actualUrl.startsWith(expectedUrlStart))
 			const u = new URL(actualUrl)
 			const searchParams = new URLSearchParams(u.search)
-			expect(searchParams.get('channelName')).to.equal('a')
-			expect(searchParams.get('channelBackend')).to.equal('b')
-			expect(searchParams.get('begDate')).to.equal('2021-08-05T07:00:00Z')
-			expect(searchParams.get('endDate')).to.equal('2021-08-05T09:00:00Z')
+			expect(searchParams.get('channelName')).toBe('a')
+			expect(searchParams.get('channelBackend')).toBe('b')
+			expect(searchParams.get('begDate')).toBe('2021-08-05T07:00:00Z')
+			expect(searchParams.get('endDate')).toBe('2021-08-05T09:00:00Z')
 		})
 	})
 
@@ -114,13 +113,13 @@ describe('class DataApiV4Client', () => {
 			expect(actualUrl.startsWith(expectedUrlStart))
 			const u = new URL(actualUrl)
 			const searchParams = new URLSearchParams(u.search)
-			expect(searchParams.get('channelName')).to.equal('a')
-			expect(searchParams.get('channelBackend')).to.equal('b')
-			expect(searchParams.get('begDate')).to.equal('2021-08-05T07:00:00Z')
-			expect(searchParams.get('endDate')).to.equal('2021-08-05T09:00:00Z')
-			expect(searchParams.get('binCount')).to.equal('100')
-			expect(searchParams.get('binningScheme')).to.equal('binnedX')
-			expect(searchParams.get('binnedXcount')).to.equal('10')
+			expect(searchParams.get('channelName')).toBe('a')
+			expect(searchParams.get('channelBackend')).toBe('b')
+			expect(searchParams.get('begDate')).toBe('2021-08-05T07:00:00Z')
+			expect(searchParams.get('endDate')).toBe('2021-08-05T09:00:00Z')
+			expect(searchParams.get('binCount')).toBe('100')
+			expect(searchParams.get('binningScheme')).toBe('binnedX')
+			expect(searchParams.get('binnedXcount')).toBe('10')
 		})
 	})
 })

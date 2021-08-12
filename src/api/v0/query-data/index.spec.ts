@@ -1,5 +1,4 @@
 import { describe, it } from 'mocha'
-import { expect } from 'chai'
 import sinon from 'sinon'
 
 import { queryData, ConfigField, EventField } from './index'
@@ -29,8 +28,8 @@ describe('query-data', () => {
 		sinon.replace(httputil, 'post', fake)
 		const expectedUrl = `${DEFAULT_URL}/query`
 		await queryData(DEFAULT_URL, MINIMAL_OPTIONS)
-		expect(fake.callCount).to.equal(1)
-		expect(fake.args[0][0]).to.equal(expectedUrl)
+		expect(fake.callCount).toBe(1)
+		expect(fake.args[0][0]).toBe(expectedUrl)
 	})
 
 	it('sends the queryOptions in the body of the request', async () => {
@@ -53,8 +52,8 @@ describe('query-data', () => {
 			},
 		}
 		await queryData(DEFAULT_URL, options)
-		expect(fake.callCount).to.equal(1)
-		expect(fake.args[0][1]).to.deep.equal(options)
+		expect(fake.callCount).toBe(1)
+		expect(fake.args[0][1]).toEqual(options)
 	})
 
 	it('parses the response correctly', async () => {
@@ -81,7 +80,7 @@ describe('query-data', () => {
 		const fake = sinon.fake.resolves(fakeAnswer)
 		sinon.replace(httputil, 'post', fake)
 		const response = await queryData(DEFAULT_URL, MINIMAL_OPTIONS)
-		expect(response).to.be.an('array').with.length(2)
-		expect(response).to.deep.equal(fakeAnswer)
+		expect(response).to.be.an('array').toHaveLength(2)
+		expect(response).toEqual(fakeAnswer)
 	})
 })
