@@ -1,4 +1,4 @@
-import { post } from '../../../http-request'
+import { post } from '../httputil'
 import type { ChannelConfigsResponse } from './response'
 
 /**
@@ -64,10 +64,11 @@ export interface ChannelConfigsQuery {
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryChannelConfigs = (
+export const queryChannelConfigs = async (
 	baseUrl: string,
 	query: ChannelConfigsQuery
 ): Promise<ChannelConfigsResponse> => {
 	const endpoint = `${baseUrl}/channels/config`
-	return post(endpoint, query) as Promise<ChannelConfigsResponse>
+	const resp = await post(endpoint, query)
+	return resp.json() as Promise<ChannelConfigsResponse>
 }

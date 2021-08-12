@@ -1,10 +1,30 @@
-import { get, objectToGetParams } from '../../http-request'
+import { fetchWithTimeout, objectToGetParams } from '../../http'
 import {
 	backendsResponseGuard,
 	binnedQueryResponseGuard,
 	channelSearchResponseGuard,
 	eventsQueryResponseGuard,
 } from './apiv4decoders'
+
+export const DEFAULT_TIMEOUT = 10000 // milliseconds
+
+/** convenience function for issuing HTTP GET requests */
+export const get = async (
+	url: RequestInfo,
+	timeoutMs: number = DEFAULT_TIMEOUT
+): Promise<unknown> => {
+	const resp = await fetchWithTimeout(
+		url,
+		{
+			method: 'GET',
+			headers: {
+				Accept: 'application/json',
+			},
+		},
+		timeoutMs
+	)
+	return resp.json()
+}
 
 /** response for a backends query operation */
 export type DataApiV4BackendsQueryResult = {
@@ -150,38 +170,43 @@ export class DataApiV4Client {
 
 	/** search for channels */
 	public async searchChannels(
-		searchOptions: DataApiV4ChannelSearchOptions
+		searchOptions: DataApiV4ChannelSearchOptions,
+		timeoutMs: number = DEFAULT_TIMEOUT
 	): Promise<DataApiV4ChannelSearchResult> {
 		const params = objectToGetParams(searchOptions)
 		const url = `${this.baseUrl}/search/channel?${params}`
-		const result = await get(url)
+		const result = await get(url, timeoutMs)
 		return channelSearchResponseGuard(result)
 	}
 
 	/** list the backends */
-	public async listBackends(): Promise<DataApiV4BackendsQueryResult> {
+	public async listBackends(
+		timeoutMs: number = DEFAULT_TIMEOUT
+	): Promise<DataApiV4BackendsQueryResult> {
 		const url = `${this.baseUrl}/backends`
-		const result = await get(url)
+		const result = await get(url, timeoutMs)
 		return backendsResponseGuard(result)
 	}
 
 	/** query for data (raw) */
 	public async queryEvents(
-		queryOptions: DataApiV4EventsQueryOptions
+		queryOptions: DataApiV4EventsQueryOptions,
+		timeoutMs: number = DEFAULT_TIMEOUT
 	): Promise<DataApiV4EventsQueryResult> {
 		const params = objectToGetParams(queryOptions)
 		const url = `${this.baseUrl}/events?${params}`
-		const result = await get(url)
+		const result = await get(url, timeoutMs)
 		return eventsQueryResponseGuard(result)
 	}
 
 	/** query for data (binned) */
 	public async queryBinned(
-		queryOptions: DataApiV4BinnedQueryOptions
+		queryOptions: DataApiV4BinnedQueryOptions,
+		timeoutMs: number = DEFAULT_TIMEOUT
 	): Promise<DataApiV4BinnedQueryResult> {
 		const params = objectToGetParams(queryOptions)
 		const url = `${this.baseUrl}/binned?${params}`
-		const result = await get(url)
+		const result = await get(url, timeoutMs)
 		return binnedQueryResponseGuard(result)
 	}
 }

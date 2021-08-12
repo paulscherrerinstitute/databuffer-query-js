@@ -1,4 +1,4 @@
-import { post } from '../../../http-request'
+import { post } from '../httputil'
 import type { Channel } from '../channel'
 import type { DataQueryRange } from './range'
 import type { AggregationSpecification } from './aggregation'
@@ -88,12 +88,13 @@ export enum Ordering {
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryData = (
+export const queryData = async (
 	baseUrl: string,
 	query: DataQuery
 ): Promise<DataResponse> => {
 	const endpoint = `${baseUrl}/query`
-	return post(endpoint, query) as Promise<DataResponse>
+	const resp = await post(endpoint, query)
+	return resp.json() as Promise<DataResponse>
 }
 
 /**
@@ -105,10 +106,10 @@ export const queryData = (
  *
  * @returns A `Promise` with the unprocessed fetch response.
  */
-export const queryDataRaw = (
+export const queryDataRaw = async (
 	baseUrl: string,
 	query: DataQuery
 ): Promise<Response> => {
 	const endpoint = `${baseUrl}/query`
-	return post(endpoint, query, true) as Promise<Response>
+	return post(endpoint, query)
 }

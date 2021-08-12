@@ -5,7 +5,7 @@ import sinon from 'sinon'
 import { queryChannelConfigs, Ordering } from './index'
 import type { ChannelConfigsQuery, ChannelConfigsResponse } from './index'
 
-import * as httpRequest from '../../../http-request'
+import * as httputil from '../httputil'
 
 const DEFAULT_URL = 'http://localhost:8080'
 
@@ -16,7 +16,7 @@ describe('module query-channel-config', () => {
 
 	it('sends out a POST request to the right URL', async () => {
 		const fake = sinon.fake()
-		sinon.replace(httpRequest, 'post', fake)
+		sinon.replace(httputil, 'post', fake)
 		const expectedUrl = `${DEFAULT_URL}/channels/config`
 		const options = {}
 		await queryChannelConfigs(DEFAULT_URL, options)
@@ -26,7 +26,7 @@ describe('module query-channel-config', () => {
 
 	it('sends the queryOptions in the body of the request', async () => {
 		const fake = sinon.fake()
-		sinon.replace(httpRequest, 'post', fake)
+		sinon.replace(httputil, 'post', fake)
 		const queryOptions: ChannelConfigsQuery = {
 			backends: ['backend1', 'backend2'],
 			ordering: Ordering.ASC,
@@ -108,7 +108,7 @@ describe('module query-channel-config', () => {
 			{ backend: 'backend3', channels: [] },
 		]
 		const fake = sinon.fake.resolves(fakeAnswer)
-		sinon.replace(httpRequest, 'post', fake)
+		sinon.replace(httputil, 'post', fake)
 		const response = await queryChannelConfigs(DEFAULT_URL, options)
 		expect(response).to.be.an('array').with.length(3)
 		expect(response).to.deep.equal(fakeAnswer)

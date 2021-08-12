@@ -2,8 +2,8 @@ import { describe, it } from 'mocha'
 import { expect } from 'chai'
 import sinon from 'sinon'
 
+import * as apiv4Module from './apiv4'
 import { DataApiV4Client } from './apiv4'
-import * as httpRequest from '../../http-request'
 
 describe('class DataApiV4Client', () => {
 	const BASE_URL = 'https://example.org/data-api/v4'
@@ -21,7 +21,7 @@ describe('class DataApiV4Client', () => {
 		it('sends a GET request to the right URL', async () => {
 			const fakeAnswer = { backends: ['a', 'b', 'c'] }
 			const fake = sinon.fake.resolves(fakeAnswer)
-			sinon.replace(httpRequest, 'get', fake)
+			sinon.replace(apiv4Module, 'get', fake)
 			const expectedUrl = `${BASE_URL}/backends`
 			await api.listBackends()
 			expect(fake.callCount).to.equal(1)
@@ -33,7 +33,7 @@ describe('class DataApiV4Client', () => {
 		it('sends a GET request to the right URL', async () => {
 			const fakeAnswer = { channels: [] }
 			const fake = sinon.fake.resolves(fakeAnswer)
-			sinon.replace(httpRequest, 'get', fake)
+			sinon.replace(apiv4Module, 'get', fake)
 			const expectedUrlStart = `${BASE_URL}/search/channel?`
 			await api.searchChannels({})
 			expect(fake.callCount).to.equal(1)
@@ -45,7 +45,7 @@ describe('class DataApiV4Client', () => {
 		it('adds searchOptions to the URL', async () => {
 			const fakeAnswer = { channels: [] }
 			const fake = sinon.fake.resolves(fakeAnswer)
-			sinon.replace(httpRequest, 'get', fake)
+			sinon.replace(apiv4Module, 'get', fake)
 			const expectedUrlStart = `${BASE_URL}/search/channel?`
 			await api.searchChannels({
 				nameRegex: 'a',
@@ -68,7 +68,7 @@ describe('class DataApiV4Client', () => {
 		it('sends a GET request to the right URL', async () => {
 			const fakeAnswer = { tsAnchor: 0, tsMs: [], tsNs: [], values: [] }
 			const fake = sinon.fake.resolves(fakeAnswer)
-			sinon.replace(httpRequest, 'get', fake)
+			sinon.replace(apiv4Module, 'get', fake)
 			const expectedUrlStart = `${BASE_URL}/events?`
 			await api.queryEvents({
 				channelBackend: 'b',
@@ -99,7 +99,7 @@ describe('class DataApiV4Client', () => {
 				maxs: [],
 			}
 			const fake = sinon.fake.resolves(fakeAnswer)
-			sinon.replace(httpRequest, 'get', fake)
+			sinon.replace(apiv4Module, 'get', fake)
 			const expectedUrlStart = `${BASE_URL}/binned?`
 			await api.queryBinned({
 				channelBackend: 'b',

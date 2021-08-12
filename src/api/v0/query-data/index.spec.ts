@@ -5,7 +5,7 @@ import sinon from 'sinon'
 import { queryData, ConfigField, EventField } from './index'
 import type { DataQuery, DataResponse } from './index'
 
-import * as httpRequest from '../../../http-request'
+import * as httputil from '../httputil'
 
 const DEFAULT_URL = 'http://localhost:8080'
 
@@ -26,7 +26,7 @@ describe('query-data', () => {
 
 	it('sends out a POST request to the right URL', async () => {
 		const fake = sinon.fake()
-		sinon.replace(httpRequest, 'post', fake)
+		sinon.replace(httputil, 'post', fake)
 		const expectedUrl = `${DEFAULT_URL}/query`
 		await queryData(DEFAULT_URL, MINIMAL_OPTIONS)
 		expect(fake.callCount).to.equal(1)
@@ -35,7 +35,7 @@ describe('query-data', () => {
 
 	it('sends the queryOptions in the body of the request', async () => {
 		const fake = sinon.fake()
-		sinon.replace(httpRequest, 'post', fake)
+		sinon.replace(httputil, 'post', fake)
 		const options: DataQuery = {
 			channels: [
 				{ backend: 'backend1', name: 'chan1' },
@@ -79,7 +79,7 @@ describe('query-data', () => {
 			},
 		]
 		const fake = sinon.fake.resolves(fakeAnswer)
-		sinon.replace(httpRequest, 'post', fake)
+		sinon.replace(httputil, 'post', fake)
 		const response = await queryData(DEFAULT_URL, MINIMAL_OPTIONS)
 		expect(response).to.be.an('array').with.length(2)
 		expect(response).to.deep.equal(fakeAnswer)

@@ -1,4 +1,4 @@
-import { post } from '../../../http-request'
+import { post } from '../httputil'
 import { ChannelNamesResponse } from './response'
 
 /**
@@ -58,10 +58,11 @@ export interface ChannelNamesQuery {
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryChannelNames = (
+export const queryChannelNames = async (
 	baseUrl: string,
 	query: ChannelNamesQuery
 ): Promise<ChannelNamesResponse> => {
 	const endpoint = `${baseUrl}/channels`
-	return post(endpoint, query) as Promise<ChannelNamesResponse>
+	const resp = await post(endpoint, query)
+	return resp.json() as Promise<ChannelNamesResponse>
 }

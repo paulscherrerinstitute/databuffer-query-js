@@ -1,4 +1,4 @@
-import { get } from '../../../http-request'
+import { get } from '../httputil'
 import type { ParametersResponse } from './parameters-response'
 
 /**
@@ -11,11 +11,12 @@ import type { ParametersResponse } from './parameters-response'
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryAggregations = (
+export const queryAggregations = async (
 	baseUrl: string
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/aggregations`
-	return get(endpoint) as Promise<ParametersResponse>
+	const resp = await get(endpoint)
+	return resp.json() as Promise<ParametersResponse>
 }
 
 /**
@@ -28,9 +29,12 @@ export const queryAggregations = (
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryBackends = (baseUrl: string): Promise<ParametersResponse> => {
+export const queryBackends = async (
+	baseUrl: string
+): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/backends`
-	return get(endpoint) as Promise<ParametersResponse>
+	const resp = await get(endpoint)
+	return resp.json() as Promise<ParametersResponse>
 }
 
 /**
@@ -43,11 +47,12 @@ export const queryBackends = (baseUrl: string): Promise<ParametersResponse> => {
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryCompression = (
+export const queryCompression = async (
 	baseUrl: string
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/compression`
-	return get(endpoint) as Promise<ParametersResponse>
+	const resp = await get(endpoint)
+	return resp.json() as Promise<ParametersResponse>
 }
 
 /**
@@ -60,11 +65,12 @@ export const queryCompression = (
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryConfigFields = (
+export const queryConfigFields = async (
 	baseUrl: string
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/configfields`
-	return get(endpoint) as Promise<ParametersResponse>
+	const resp = await get(endpoint)
+	return resp.json() as Promise<ParametersResponse>
 }
 
 /**
@@ -77,11 +83,12 @@ export const queryConfigFields = (
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryEventFields = (
+export const queryEventFields = async (
 	baseUrl: string
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/eventfields`
-	return get(endpoint) as Promise<ParametersResponse>
+	const resp = await get(endpoint)
+	return resp.json() as Promise<ParametersResponse>
 }
 
 /**
@@ -94,9 +101,12 @@ export const queryEventFields = (
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryOrdering = (baseUrl: string): Promise<ParametersResponse> => {
+export const queryOrdering = async (
+	baseUrl: string
+): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/ordering`
-	return get(endpoint) as Promise<ParametersResponse>
+	const resp = await get(endpoint)
+	return resp.json() as Promise<ParametersResponse>
 }
 
 /**
@@ -109,9 +119,10 @@ export const queryOrdering = (baseUrl: string): Promise<ParametersResponse> => {
  *
  * @returns A `Promise` with the results from the query.
  */
-export const queryResponseFormats = (
+export const queryResponseFormats = async (
 	baseUrl: string
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/responseformat`
-	return get(endpoint) as Promise<ParametersResponse>
+	const resp = await get(endpoint)
+	return resp.json() as Promise<ParametersResponse>
 }

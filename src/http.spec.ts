@@ -18,7 +18,7 @@ import { expect } from 'chai'
 // import sinon from 'sinon'
 // import type { SinonSpy } from 'sinon'
 
-import { objectToGetParams } from './http-request'
+import { objectToGetParams } from './http'
 
 // import { COMMON_FETCH_OPTIONS, post } from './http-request'
 
@@ -42,7 +42,7 @@ import { objectToGetParams } from './http-request'
 
 // const DEFAULT_URL = 'http://localhost:8080'
 
-describe('http-request', () => {
+describe('module http', () => {
 	// 	afterEach(() => {
 	// 		removeFakeFetch()
 	// 	})
