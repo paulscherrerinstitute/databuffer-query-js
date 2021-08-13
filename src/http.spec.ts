@@ -13,10 +13,6 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-import { describe, it } from 'mocha'
-// import sinon from 'sinon'
-// import type { SinonSpy } from 'sinon'
-
 import { objectToGetParams } from './http'
 
 // import { COMMON_FETCH_OPTIONS, post } from './http-request'
