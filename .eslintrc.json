@@ -2,12 +2,12 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:mocha/recommended"
+    "plugin:jest/recommended"
   ],
   "env": {
     "browser": true,
     "es6": true,
-    "mocha": true
+    "jest": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -16,13 +16,12 @@
   },
   "plugins": [
     "@typescript-eslint/eslint-plugin",
-    "mocha"
+    "jest"
   ],
   "rules": {
     "no-mixed-spaces-and-tabs": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-inferrable-types": "off",
-    "@typescript-eslint/member-delimiter-style": "off",
-    "mocha/no-mocha-arrows": "off"
+    "@typescript-eslint/member-delimiter-style": "off"
   }
 }

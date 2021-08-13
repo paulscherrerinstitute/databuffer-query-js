@@ -1,11 +1,9 @@
-import { describe, it } from 'mocha'
-import { expect } from 'chai'
-import sinon from 'sinon'
-
 import { queryData, ConfigField, EventField } from './index'
 import type { DataQuery, DataResponse } from './index'
 
-import * as httputil from '../httputil'
+import { post } from '../httputil'
+jest.mock('../httputil')
+const mockedPost = post as jest.MockedFunction<typeof post>
 
 const DEFAULT_URL = 'http://localhost:8080'
 
@@ -20,22 +18,21 @@ const MINIMAL_OPTIONS: DataQuery = {
 }
 
 describe('query-data', () => {
-	afterEach(() => {
-		sinon.restore()
+	beforeEach(() => {
+		mockedPost.mockClear()
+		mockedPost.mockResolvedValue({
+			json: () => Promise.resolve([]),
+		} as Response)
 	})
 
 	it('sends out a POST request to the right URL', async () => {
-		const fake = sinon.fake()
-		sinon.replace(httputil, 'post', fake)
 		const expectedUrl = `${DEFAULT_URL}/query`
 		await queryData(DEFAULT_URL, MINIMAL_OPTIONS)
-		expect(fake.callCount).to.equal(1)
-		expect(fake.args[0][0]).to.equal(expectedUrl)
+		expect(mockedPost).toHaveBeenCalledTimes(1)
+		expect(mockedPost.mock.calls[0][0]).toBe(expectedUrl)
 	})
 
 	it('sends the queryOptions in the body of the request', async () => {
-		const fake = sinon.fake()
-		sinon.replace(httputil, 'post', fake)
 		const options: DataQuery = {
 			channels: [
 				{ backend: 'backend1', name: 'chan1' },
@@ -53,8 +50,7 @@ describe('query-data', () => {
 			},
 		}
 		await queryData(DEFAULT_URL, options)
-		expect(fake.callCount).to.equal(1)
-		expect(fake.args[0][1]).to.deep.equal(options)
+		expect(mockedPost.mock.calls[0][1]).toEqual(options)
 	})
 
 	it('parses the response correctly', async () => {
@@ -78,10 +74,12 @@ describe('query-data', () => {
 				],
 			},
 		]
-		const fake = sinon.fake.resolves(fakeAnswer)
-		sinon.replace(httputil, 'post', fake)
+		mockedPost.mockResolvedValueOnce({
+			json: () => Promise.resolve(fakeAnswer),
+		} as Response)
 		const response = await queryData(DEFAULT_URL, MINIMAL_OPTIONS)
-		expect(response).to.be.an('array').with.length(2)
-		expect(response).to.deep.equal(fakeAnswer)
+		expect(Array.isArray(response)).toBe(true)
+		expect(response.length).toBe(2)
+		expect(response).toEqual(fakeAnswer)
 	})
 })

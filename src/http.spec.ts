@@ -13,11 +13,6 @@
 //
 //////////////////////////////////////////////////////////////////////
 
-import { describe, it } from 'mocha'
-import { expect } from 'chai'
-// import sinon from 'sinon'
-// import type { SinonSpy } from 'sinon'
-
 import { objectToGetParams } from './http'
 
 // import { COMMON_FETCH_OPTIONS, post } from './http-request'
@@ -111,25 +106,25 @@ describe('module http', () => {
 		it('works on simple strings', () => {
 			const obj = { a: 'alpha' }
 			const converted = objectToGetParams(obj)
-			expect(converted).to.equal('a=alpha')
+			expect(converted).toBe('a=alpha')
 		})
 
 		it('joins multiple values with &', () => {
 			const obj = { a: 'alpha', b: 'bravo', c: 'charlie' }
 			const converted = objectToGetParams(obj)
-			expect(converted).to.equal('a=alpha&b=bravo&c=charlie')
+			expect(converted).toBe('a=alpha&b=bravo&c=charlie')
 		})
 
 		it('URI encodes key', () => {
 			const obj = { 'some thing': 'else' }
 			const converted = objectToGetParams(obj)
-			expect(converted).to.equal('some%20thing=else')
+			expect(converted).toBe('some%20thing=else')
 		})
 
 		it('URI encodes value', () => {
 			const obj = { email: 'johndoe@example.org' }
 			const converted = objectToGetParams(obj)
-			expect(converted).to.equal('email=johndoe%40example.org')
+			expect(converted).toBe('email=johndoe%40example.org')
 		})
 	})
 })

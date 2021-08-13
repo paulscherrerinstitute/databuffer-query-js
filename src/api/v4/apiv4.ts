@@ -1,30 +1,11 @@
-import { fetchWithTimeout, objectToGetParams } from '../../http'
+import { objectToGetParams } from '../../http'
+import { get, DEFAULT_TIMEOUT } from './httputil'
 import {
 	backendsResponseGuard,
 	binnedQueryResponseGuard,
 	channelSearchResponseGuard,
 	eventsQueryResponseGuard,
 } from './apiv4decoders'
-
-export const DEFAULT_TIMEOUT = 10000 // milliseconds
-
-/** convenience function for issuing HTTP GET requests */
-export const get = async (
-	url: RequestInfo,
-	timeoutMs: number = DEFAULT_TIMEOUT
-): Promise<unknown> => {
-	const resp = await fetchWithTimeout(
-		url,
-		{
-			method: 'GET',
-			headers: {
-				Accept: 'application/json',
-			},
-		},
-		timeoutMs
-	)
-	return resp.json()
-}
 
 /** response for a backends query operation */
 export type DataApiV4BackendsQueryResult = {
