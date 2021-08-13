@@ -1,14 +1,29 @@
 import { QueryRest } from './index'
 import type { DataQuery, ChannelNamesQuery, ChannelConfigsQuery } from './index'
-import * as qChConfigs from './query-channel-configs'
-import * as qChNames from './query-channel-names'
-import * as qData from './query-data'
+// import * as qChConfigs from './query-channel-configs'
+// import * as qChNames from './query-channel-names'
+// import * as qData from './query-data'
+import { queryChannelConfigs, Ordering } from './query-channel-configs'
+jest.mock('./query-channel-configs')
+const mockedQueryChannelConfigs = queryChannelConfigs as jest.MockedFunction<
+	typeof queryChannelConfigs
+>
+import { queryChannelNames } from './query-channel-names'
+const mockedQueryChannelNames = queryChannelNames as jest.MockedFunction<
+	typeof queryChannelNames
+>
+jest.mock('./query-channel-names')
+import { queryData, ConfigField, EventField } from './query-data'
+const mockedQueryData = queryData as jest.MockedFunction<typeof queryData>
+jest.mock('./query-data')
 
 const DEFAULT_URL = 'http://localhost:8080'
 
 describe('class QueryRest', () => {
-	afterEach(() => {
-		sinon.restore()
+	beforeEach(() => {
+		mockedQueryChannelConfigs.mockClear()
+		mockedQueryChannelNames.mockClear()
+		mockedQueryData.mockClear()
 	})
 
 	it('uses the URL of the constructor', () => {
@@ -24,82 +39,72 @@ describe('class QueryRest', () => {
 
 	describe('queryChannelConfigs', () => {
 		it('uses this.url', async () => {
-			const fake = sinon.fake()
-			sinon.replace(qChConfigs, 'queryChannelConfigs', fake)
 			const qr = new QueryRest(DEFAULT_URL)
 			await qr.queryChannelConfigs({})
-			expect(fake.callCount).toBe(1)
-			expect(fake.args[0][0]).toBe(DEFAULT_URL)
+			expect(mockedQueryChannelConfigs).toHaveBeenCalledTimes(1)
+			expect(mockedQueryChannelConfigs.mock.calls[0][0]).toBe(DEFAULT_URL)
 		})
 
 		it('passes queryOptions', async () => {
 			const qr = new QueryRest(DEFAULT_URL)
 			const query: ChannelConfigsQuery = {
 				backends: ['backend1', 'backend2'],
-				ordering: qChConfigs.Ordering.ASC,
+				ordering: Ordering.ASC,
 				regex: '^sineg',
 				sourceRegex: 'LLRF',
 			}
-			const fake = sinon.fake()
-			sinon.replace(qChConfigs, 'queryChannelConfigs', fake)
 			await qr.queryChannelConfigs(query)
-			expect(fake.callCount).toBe(1)
-			expect(fake.args[0]).to.be.an('array').toHaveLength(2)
-			expect(fake.args[0][1]).toEqual(query)
+			expect(mockedQueryChannelConfigs).toHaveBeenCalledTimes(1)
+			expect(Array.isArray(mockedQueryChannelConfigs.mock.calls[0])).toBe(true)
+			expect(mockedQueryChannelConfigs.mock.calls[0].length).toBe(2)
+			expect(mockedQueryChannelConfigs.mock.calls[0][1]).toEqual(query)
 		})
 	})
 
 	describe('queryChannelNames', () => {
 		it('uses this.url', async () => {
-			const fake = sinon.fake()
-			sinon.replace(qChNames, 'queryChannelNames', fake)
 			const qr = new QueryRest(DEFAULT_URL)
 			await qr.queryChannelNames({})
-			expect(fake.callCount).toBe(1)
-			expect(fake.args[0][0]).toBe(DEFAULT_URL)
+			expect(mockedQueryChannelNames).toHaveBeenCalledTimes(1)
+			expect(mockedQueryChannelNames.mock.calls[0][0]).toBe(DEFAULT_URL)
 		})
 
 		it('passes queryOptions', async () => {
 			const qr = new QueryRest(DEFAULT_URL)
 			const query: ChannelNamesQuery = {
 				backends: ['backend1', 'backend2'],
-				ordering: qChNames.Ordering.ASC,
+				ordering: Ordering.ASC,
 				regex: '^sineg',
 				reload: true,
 			}
-			const fake = sinon.fake()
-			sinon.replace(qChNames, 'queryChannelNames', fake)
 			await qr.queryChannelNames(query)
-			expect(fake.callCount).toBe(1)
-			expect(fake.args[0]).to.be.an('array').toHaveLength(2)
-			expect(fake.args[0][1]).toEqual(query)
+			expect(mockedQueryChannelNames).toHaveBeenCalledTimes(1)
+			expect(Array.isArray(mockedQueryChannelNames.mock.calls[0])).toBe(true)
+			expect(mockedQueryChannelNames.mock.calls[0].length).toBe(2)
+			expect(mockedQueryChannelNames.mock.calls[0][1]).toEqual(query)
 		})
 	})
 
 	describe('queryData', () => {
 		it('uses this.url', async () => {
-			const fake = sinon.fake()
-			sinon.replace(qData, 'queryData', fake)
 			const qr = new QueryRest(DEFAULT_URL)
 			await qr.queryData({} as DataQuery)
-			expect(fake.callCount).toBe(1)
-			expect(fake.args[0][0]).toBe(DEFAULT_URL)
+			expect(mockedQueryData).toHaveBeenCalledTimes(1)
+			expect(mockedQueryData.mock.calls[0][0]).toBe(DEFAULT_URL)
 		})
 
 		it('passes queryRequest', async () => {
-			const fake = sinon.fake()
-			sinon.replace(qData, 'queryData', fake)
 			const qr = new QueryRest(DEFAULT_URL)
 			const query: DataQuery = {
 				channels: [
 					{ backend: 'backend1', name: 'chan1' },
 					{ backend: 'backend2', name: 'chan2' },
 				],
-				configFields: [qData.ConfigField.GLOBAL_MILLIS, qData.ConfigField.TYPE],
+				configFields: [ConfigField.GLOBAL_MILLIS, ConfigField.TYPE],
 				eventFields: [
-					qData.EventField.GLOBAL_MILLIS,
-					qData.EventField.PULSE_ID,
-					qData.EventField.VALUE,
+					EventField.GLOBAL_MILLIS,
+					EventField.PULSE_ID,
+					EventField.VALUE,
 				],
 				range: {
 					startPulseId: 1,
@@ -107,8 +112,8 @@ describe('class QueryRest', () => {
 				},
 			}
 			await qr.queryData(query)
-			expect(fake.callCount).toBe(1)
-			expect(fake.args[0][1]).toEqual(query)
+			expect(mockedQueryData).toHaveBeenCalledTimes(1)
+			expect(mockedQueryData.mock.calls[0][1]).toEqual(query)
 		})
 	})
 })

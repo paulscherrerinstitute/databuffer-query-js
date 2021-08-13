@@ -1,28 +1,29 @@
 import { queryChannelNames, Ordering } from './index'
 import type { ChannelNamesQuery, ChannelNamesResponse } from './index'
 
-import * as httputil from '../httputil'
+import { post } from '../httputil'
+jest.mock('../httputil')
+const mockedPost = post as jest.MockedFunction<typeof post>
 
 const DEFAULT_URL = 'http://localhost:8080'
 
 describe('query-channel-names', () => {
-	afterEach(() => {
-		sinon.restore()
+	beforeEach(() => {
+		mockedPost.mockClear()
+		mockedPost.mockResolvedValue({
+			json: () => Promise.resolve({}),
+		} as Response)
 	})
 
 	it('sends out a POST request to the right URL', async () => {
-		const fake = sinon.fake()
-		sinon.replace(httputil, 'post', fake)
 		const expectedUrl = `${DEFAULT_URL}/channels`
 		const options = {}
 		await queryChannelNames(DEFAULT_URL, options)
-		expect(fake.callCount).toBe(1)
-		expect(fake.args[0][0]).toBe(expectedUrl)
+		expect(mockedPost).toHaveBeenCalledTimes(1)
+		expect(mockedPost.mock.calls[0][0]).toBe(expectedUrl)
 	})
 
 	it('sends the queryOptions in the body of the request', async () => {
-		const fake = sinon.fake()
-		sinon.replace(httputil, 'post', fake)
 		const queryOptions: ChannelNamesQuery = {
 			backends: ['backend1', 'backend2'],
 			ordering: Ordering.ASC,
@@ -30,8 +31,7 @@ describe('query-channel-names', () => {
 			reload: true,
 		}
 		await queryChannelNames(DEFAULT_URL, queryOptions)
-		expect(fake.callCount).toBe(1)
-		expect(fake.args[0][1]).toEqual(queryOptions)
+		expect(mockedPost.mock.calls[0][1]).toEqual(queryOptions)
 	})
 
 	it('parses the response correctly', async () => {
@@ -41,10 +41,12 @@ describe('query-channel-names', () => {
 			{ backend: 'backend2', channels: ['chan21', 'chan22', 'chan23'] },
 			{ backend: 'backend3', channels: ['chan31', 'chan32', 'chan33'] },
 		]
-		const fake = sinon.fake.resolves(fakeAnswer)
-		sinon.replace(httputil, 'post', fake)
+		mockedPost.mockResolvedValueOnce({
+			json: () => Promise.resolve(fakeAnswer),
+		} as Response)
 		const response = await queryChannelNames(DEFAULT_URL, options)
-		expect(response).to.be.an('array').toHaveLength(3)
+		expect(Array.isArray(response)).toBe(true)
+		expect(response.length).toBe(3)
 		expect(response).toEqual(fakeAnswer)
 	})
 })
