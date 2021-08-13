@@ -17,7 +17,7 @@
 		"build": "tsc --build tsconfig.json",
 		"clean": "rm -rf dist/ coverage/ .nyc_output/",
 		"deps:update-to-latest": "npm-check-updates -u && npm install",
-		"docs": "typedoc --mode modules --ignoreCompilerErrors --excludePrivate --out docs/api ./src",
+		"docs": "typedoc --excludePrivate --out docs/api ./src",
 		"lint:eslint": "eslint 'src/**/*.ts' 'test/**/*.ts'",
 		"lint:prettier": "prettier 'src/**/*.ts' 'test/**/*.ts' --list-different || ( echo '↑↑↑  these files are not well formatted  ↑↑↑' && exit 1 )",
 		"format:eslint": "eslint 'src/**/*.ts' 'test/**/*.ts' --fix",
