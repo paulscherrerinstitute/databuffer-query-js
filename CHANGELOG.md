@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.1](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.7.0...v0.7.1) (2021-08-16)
+
+
+### Features
+
+* detect api version ([95d7b4f](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/95d7b4f707b9fad01e16187752d298fe941a7bb8)), closes [#21](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/21)
+* send accept header in apiv4 requests ([721b4dc](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/721b4dc60c07bb6797225d6da583b5bfce4d3264)), closes [#22](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/22)
+
 ## [0.7.0](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.6.7...v0.7.0) (2021-08-06)
 
 
