@@ -4,6 +4,7 @@ import {
 	backendsResponseGuard,
 	binnedQueryResponseGuard,
 	channelSearchResponseGuard,
+	dataApiVersionResponseGuard,
 	eventsQueryResponseGuard,
 } from './apiv4decoders'
 
@@ -48,6 +49,14 @@ export type DataApiV4ChannelSearchResultItem = {
 /** response for a channel search operation */
 export type DataApiV4ChannelSearchResult = {
 	channels: DataApiV4ChannelSearchResultItem[]
+}
+
+/** response for a data api version query operation */
+export type DataApiV4DataApiVersionResult = {
+	data_api_version: {
+		major: number
+		minor?: number
+	}
 }
 
 /** options for an events query operation */
@@ -167,6 +176,15 @@ export class DataApiV4Client {
 		const url = `${this.baseUrl}/backends`
 		const result = await get(url, timeoutMs)
 		return backendsResponseGuard(result)
+	}
+
+	/** query data api version */
+	public async queryDataApiVersion(
+		timeoutMs: number = DEFAULT_TIMEOUT
+	): Promise<DataApiV4DataApiVersionResult> {
+		const url = `${this.baseUrl}/version`
+		const result = await get(url, timeoutMs)
+		return dataApiVersionResponseGuard(result)
 	}
 
 	/** query for data (raw) */

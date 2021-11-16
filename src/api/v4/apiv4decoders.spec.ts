@@ -3,6 +3,7 @@ import {
 	binnedQueryResponseGuard,
 	channelSearchResponseGuard,
 	eventsQueryResponseGuard,
+	dataApiVersionResponseGuard,
 } from './apiv4decoders'
 
 describe('module apiv4decoders', () => {
@@ -447,6 +448,81 @@ describe('module apiv4decoders', () => {
 			const input = { ...MINIMAL_OK_DATA } as { [k: string]: unknown }
 			delete input.maxs
 			expect(() => binnedQueryResponseGuard(input)).toThrowError()
+		})
+	})
+
+	describe('dataApiVersionResponseGuard', () => {
+		it('works with good data', () => {
+			const input = {
+				data_api_version: {
+					major: 4,
+					minor: 0,
+				},
+			}
+			const result = dataApiVersionResponseGuard(input)
+			expect(result).toEqual(input)
+		})
+
+		it('rejects empty object', () => {
+			expect(() => dataApiVersionResponseGuard({})).toThrowError()
+			expect(() =>
+				dataApiVersionResponseGuard({ data_api_version: {} })
+			).toThrowError()
+		})
+
+		it('rejects major missing', () => {
+			expect(() =>
+				dataApiVersionResponseGuard({
+					data_api_version: {
+						minor: 0,
+					},
+				})
+			).toThrowError()
+		})
+
+		it('rejects major is string not number', () => {
+			expect(() =>
+				dataApiVersionResponseGuard({
+					data_api_version: {
+						major: '4',
+						minor: 0,
+					},
+				})
+			).toThrowError()
+		})
+
+		it('rejects minor is string not number', () => {
+			expect(() =>
+				dataApiVersionResponseGuard({
+					data_api_version: {
+						major: 4,
+						minor: '0',
+					},
+				})
+			).toThrowError()
+		})
+
+		it('accepts minor missing', () => {
+			const expectedOutput = {
+				data_api_version: {
+					major: 4,
+				},
+			}
+			const result = dataApiVersionResponseGuard(expectedOutput)
+			expect(result).toEqual(expectedOutput)
+		})
+
+		it('removes extra keys in object', () => {
+			const expectedOutput = {
+				data_api_version: {
+					major: 4,
+					minor: 0,
+				},
+			}
+			const input = { ...expectedOutput, patch: 12 }
+			const result = dataApiVersionResponseGuard(input)
+			expect(result).not.toHaveProperty('patch')
+			expect(result).toEqual(expectedOutput)
 		})
 	})
 })

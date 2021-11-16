@@ -70,3 +70,12 @@ export const binnedQueryResponseGuard = guard(
 		counts: array(either3(integer, array(integer), array(array(integer)))),
 	})
 )
+
+export const dataApiVersionResponseGuard = guard(
+	object({
+		data_api_version: object({
+			major: integer,
+			minor: optional(integer),
+		}),
+	})
+)

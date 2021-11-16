@@ -13,15 +13,45 @@ describe('module api/util', () => {
 	})
 
 	describe('detectVersion', () => {
-		it('returns version string from version field in response', async () => {
-			const version = '1.2.3-rc4'
+		it('returns version string for API v4 with major and minor', async () => {
+			const expectedVersion = '4.2'
 			mockedFetch.mockResolvedValueOnce({
 				ok: true,
 				status: 200,
-				json: () => Promise.resolve({ version }),
+				json: () =>
+					Promise.resolve({ data_api_version: { major: 4, minor: 2 } }),
 			} as Response)
 			const actualVersion = await detectVersion(DEFAULT_URL)
-			expect(actualVersion).toBe(version)
+			expect(actualVersion).toBe(expectedVersion)
+		})
+
+		it('returns version string for API v4 with major version only', async () => {
+			const expectedVersion = '4'
+			mockedFetch.mockResolvedValueOnce({
+				ok: true,
+				status: 200,
+				json: () => Promise.resolve({ data_api_version: { major: 4 } }),
+			} as Response)
+			const actualVersion = await detectVersion(DEFAULT_URL)
+			expect(actualVersion).toBe(expectedVersion)
+		})
+
+		it('throws if unsupported response format', async () => {
+			mockedFetch.mockResolvedValueOnce({
+				ok: true,
+				status: 200,
+				json: () =>
+					Promise.resolve({
+						new_version_structure: {
+							major: 5,
+							minor: 2,
+							patch: 7,
+							text: '5.2.7',
+							build: 'experimental',
+						},
+					}),
+			} as Response)
+			await expect(detectVersion(DEFAULT_URL)).rejects.toThrow()
 		})
 
 		it('returns undefined on HTTP 404', async () => {
