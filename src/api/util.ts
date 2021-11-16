@@ -1,12 +1,5 @@
-import * as decoders from 'decoders'
 import { fetchWithTimeout } from '../http'
-
-type VersionInfo = {
-	version: string
-}
-const versionGuard = decoders.guard(
-	decoders.object({ version: decoders.string })
-)
+import { dataApiVersionResponseGuard } from './v4/apiv4decoders'
 
 /**
  * Contact the API provider at base URL `url` and try to read
@@ -24,17 +17,25 @@ export const detectVersion = async (
 		headers: { Accept: 'application/json' },
 	})
 	if (resp.status === 404) {
-		return undefined
+		return undefined // OK, this API provider doesn't provide a /version endpoint
 	}
 	if (!resp.ok) {
 		throw new Error(
 			`could not detect version: ${resp.status} ${resp.statusText}`
 		)
 	}
+	const respData: unknown = await resp.json()
+	// in turn, try each known API version
 	try {
-		const versionInfo: VersionInfo = versionGuard(await resp.json())
-		return versionInfo.version
+		const tmp = dataApiVersionResponseGuard(respData)
+		let v = `${tmp.data_api_version.major}`
+		if (tmp.data_api_version.minor) {
+			v += `.${tmp.data_api_version.minor}`
+		}
+		return v
 	} catch (e) {
-		throw new Error('received malformed version info')
+		// decoder throws error --> it's not Data API V4; try next one (if there is any)
 	}
+	// out of known API versions / providers --> throw error
+	throw new Error('could not identify version from API response')
 }
