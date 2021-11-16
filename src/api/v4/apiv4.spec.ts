@@ -6,6 +6,7 @@ import {
 	DataApiV4ChannelSearchOptions,
 	DataApiV4ChannelSearchResult,
 	DataApiV4Client,
+	DataApiV4DataApiVersionResult,
 	DataApiV4EventsQueryOptions,
 	DataApiV4EventsQueryResult,
 } from './apiv4'
@@ -222,6 +223,42 @@ describe('class DataApiV4Client', () => {
 
 		it('returns binned events', async () => {
 			const result = await api.queryBinned(DUMMY_QUERY)
+			expect(result).toEqual(DUMMY_RESPONSE)
+		})
+	})
+
+	describe('method queryDataApiVersion', () => {
+		const DUMMY_RESPONSE: DataApiV4DataApiVersionResult = {
+			data_api_version: {
+				major: 4,
+				minor: 5,
+			},
+		}
+
+		beforeEach(() => {
+			mockedGet.mockResolvedValue(DUMMY_RESPONSE)
+		})
+
+		it('sends a GET request to the right URL', async () => {
+			const expectedUrl = `${BASE_URL}/version`
+			await api.queryDataApiVersion()
+			expect(mockedGet).toHaveBeenCalledTimes(1)
+			const actualUrl = mockedGet.mock.calls[0][0] as string
+			expect(actualUrl).toEqual(expectedUrl)
+		})
+
+		it('uses DEFAULT_TIMEOUT if not specified', async () => {
+			await api.queryDataApiVersion()
+			expect(mockedGet.mock.calls[0][1]).toBe(DEFAULT_TIMEOUT)
+		})
+
+		it('overrides DEFAULT_TIMEOUT if specified', async () => {
+			await api.queryDataApiVersion(60000)
+			expect(mockedGet.mock.calls[0][1]).toBe(60000)
+		})
+
+		it('returns version events', async () => {
+			const result = await api.queryDataApiVersion()
 			expect(result).toEqual(DUMMY_RESPONSE)
 		})
 	})
