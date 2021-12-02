@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.3](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.7.2...v0.7.3) (2021-12-02)
+
+
+### Features
+
+* transform data points to line plot data ([089d249](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/089d2491a9a6dc3519fd491c498b84159b39f262)), closes [#25](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/25)
+
 ### [0.7.2](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.7.1...v0.7.2) (2021-11-16)
 
 
