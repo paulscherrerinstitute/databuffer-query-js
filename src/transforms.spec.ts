@@ -3,14 +3,20 @@ import type { Datapoint } from './transforms'
 
 describe('module transforms', () => {
 	describe('transformToLinePlotData', () => {
-		it('returns empty datapoints on empty series', () => {
+		it('returns y undefined on empty series', () => {
 			const input: Datapoint<number>[] = []
 			const output = transformToLinePlotData(input, {
 				startAt: 100,
 				endAt: 130,
 				stepSize: 10,
 			})
-			expect(output).toHaveLength(0)
+			const expectedDatapoints = [
+				{ x: 100, y: undefined },
+				{ x: 110, y: undefined },
+				{ x: 120, y: undefined },
+				{ x: 130, y: undefined },
+			]
+			expect(output).toEqual(expectedDatapoints)
 		})
 
 		it('returns empty datapoints if startAt > endAt', () => {
@@ -26,7 +32,7 @@ describe('module transforms', () => {
 			expect(output).toHaveLength(0)
 		})
 
-		it('returns empty datapoints on input after range', () => {
+		it('returns y undefined on input after range', () => {
 			const input: Datapoint<number>[] = [
 				{ x: 200, y: 1 },
 				{ x: 300, y: 2 },
@@ -36,7 +42,13 @@ describe('module transforms', () => {
 				endAt: 130,
 				stepSize: 10,
 			})
-			expect(output).toHaveLength(0)
+			const expectedDatapoints = [
+				{ x: 100, y: undefined },
+				{ x: 110, y: undefined },
+				{ x: 120, y: undefined },
+				{ x: 130, y: undefined },
+			]
+			expect(output).toEqual(expectedDatapoints)
 		})
 
 		it('repeats last datapoint on input before range', () => {
@@ -93,7 +105,7 @@ describe('module transforms', () => {
 				stepSize: 10,
 			})
 			const expectedDatapoints = [
-				// no data point for x = 100
+				{ x: 100, y: undefined },
 				{ x: 110, y: 1 },
 				{ x: 120, y: 4 },
 				{ x: 130, y: 4 },
