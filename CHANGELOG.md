@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.4](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.7.3...v0.7.4) (2021-12-03)
+
+
+### Features
+
+* fill line plot data with undefined ([5399d8f](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/5399d8f95a99cd7b92dbe636900d9e55318d9d54))
+
 ### [0.7.3](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.7.2...v0.7.3) (2021-12-02)
 
 
