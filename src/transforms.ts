@@ -60,3 +60,39 @@ export function transformToLinePlotData<Y>(
 	}
 	return result
 }
+
+export type Correlation<T> = { x: T; y: T }[]
+
+/**
+ * Correlate two data series X(t) and Y(t).
+ * For every t in the range try to find a datapoint in each X(t) and Y(t) and pair them up.
+ *
+ * result := { (x,y) | x in X(t) and y in Y(t) for the same value of t }
+ *
+ * @param seriesX	The data points that will become the X values of the correlation
+ * @param seriesY The data points that will become the Y values of the correlation
+ * @returns An array of correlated data points
+ */
+export function correlateDataSeries<T>(
+	seriesX: Datapoint<T>[],
+	seriesY: Datapoint<T>[]
+): Correlation<T> {
+	const result: Correlation<T> = []
+
+	// initialize lookup map
+	const lookupY = new Map<number, T>()
+	for (const pt of seriesY) {
+		lookupY.set(pt.x, pt.y)
+	}
+
+	// populate correlation
+	for (const ptX of seriesX) {
+		const t = ptX.x
+		const x = ptX.y
+		const y = lookupY.get(t)
+		if (y === undefined) continue
+		result.push({ x, y })
+	}
+
+	return result
+}

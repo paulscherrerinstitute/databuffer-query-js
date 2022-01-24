@@ -1,4 +1,4 @@
-import { transformToLinePlotData } from './transforms'
+import { correlateDataSeries, transformToLinePlotData } from './transforms'
 import type { Datapoint } from './transforms'
 
 describe('module transforms', () => {
@@ -134,6 +134,120 @@ describe('module transforms', () => {
 				{ x: 129, y: 3 },
 			]
 			expect(output).toEqual(expectedDatapoints)
+		})
+	})
+
+	describe('correlateDataSeries', () => {
+		it('returns empty for series A empty', () => {
+			const seriesX: Datapoint<number>[] = []
+			const seriesY: Datapoint<number>[] = [
+				{ x: 10, y: 1 },
+				{ x: 20, y: 2 },
+				{ x: 30, y: 3 },
+			]
+			const output = correlateDataSeries(seriesX, seriesY)
+			expect(output).toHaveLength(0)
+		})
+
+		it('returns empty for series B empty', () => {
+			const seriesX: Datapoint<number>[] = []
+			const seriesY: Datapoint<number>[] = [
+				{ x: 10, y: 1 },
+				{ x: 20, y: 2 },
+				{ x: 30, y: 3 },
+			]
+			const output = correlateDataSeries(seriesX, seriesY)
+			expect(output).toHaveLength(0)
+		})
+
+		it('returns empty for series A and B empty', () => {
+			const seriesX: Datapoint<number>[] = []
+			const seriesY: Datapoint<number>[] = []
+			const output = correlateDataSeries(seriesX, seriesY)
+			expect(output).toHaveLength(0)
+		})
+
+		it('returns empty for series A and B having different x', () => {
+			const seriesX: Datapoint<number>[] = [
+				{ x: 10, y: 1 },
+				{ x: 20, y: 2 },
+				{ x: 30, y: 3 },
+			]
+			const seriesY: Datapoint<number>[] = [
+				{ x: 11, y: 1 },
+				{ x: 21, y: 2 },
+				{ x: 31, y: 3 },
+			]
+			const output = correlateDataSeries(seriesX, seriesY)
+			expect(output).toHaveLength(0)
+		})
+
+		it('returns simple correlated result', () => {
+			const seriesX: Datapoint<number>[] = [
+				{ x: 10, y: 1 },
+				{ x: 20, y: 2 },
+				{ x: 30, y: 3 },
+			]
+			const seriesY: Datapoint<number>[] = [
+				{ x: 10, y: 4 },
+				{ x: 20, y: 5 },
+				{ x: 30, y: 6 },
+			]
+			const expectedDataPoints = [
+				{ x: 1, y: 4 },
+				{ x: 2, y: 5 },
+				{ x: 3, y: 6 },
+			]
+			const output = correlateDataSeries(seriesX, seriesY)
+			expect(output).toEqual(expectedDataPoints)
+		})
+
+		it('returns partial correlated result', () => {
+			const seriesX: Datapoint<number>[] = [
+				{ x: 10, y: 1 },
+				{ x: 20, y: 2 },
+				{ x: 30, y: 3 },
+			]
+			const seriesY: Datapoint<number>[] = [
+				{ x: 10, y: 4 },
+				{ x: 21, y: 5 },
+				{ x: 30, y: 6 },
+			]
+			const expectedDataPoints = [
+				{ x: 1, y: 4 },
+				{ x: 3, y: 6 },
+			]
+			const output = correlateDataSeries(seriesX, seriesY)
+			expect(output).toEqual(expectedDataPoints)
+		})
+
+		it('returns multiple datapoints with the same x and different y', () => {
+			const seriesX: Datapoint<number>[] = [
+				{ x: 10, y: 1 },
+				{ x: 20, y: 2 },
+				{ x: 30, y: 3 },
+				{ x: 40, y: 2 },
+				{ x: 50, y: 3 },
+				{ x: 60, y: 2 },
+			]
+			const seriesY: Datapoint<number>[] = [
+				{ x: 10, y: 4 },
+				{ x: 20, y: 5 },
+				{ x: 30, y: 6 },
+				{ x: 40, y: 7 },
+				{ x: 50, y: 8 },
+				{ x: 60, y: 9 },
+			]
+			const expectedDataPoints = [
+				{ x: 1, y: 4 },
+				{ x: 2, y: 5 },
+				{ x: 3, y: 6 },
+				{ x: 2, y: 7 },
+				{ x: 3, y: 8 },
+				{ x: 2, y: 9 },
+			]
+			const output = correlateDataSeries(seriesX, seriesY)
+			expect(output).toEqual(expectedDataPoints)
 		})
 	})
 })
