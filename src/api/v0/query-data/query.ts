@@ -1,3 +1,4 @@
+import { dataResponseGuard } from '../apiv0decoders'
 import { post } from '../httputil'
 import type { Channel } from '../channel'
 import type { DataQueryRange } from './range'
@@ -94,7 +95,9 @@ export const queryData = async (
 ): Promise<DataResponse> => {
 	const endpoint = `${baseUrl}/query`
 	const resp = await post(endpoint, query)
-	return resp.json() as Promise<DataResponse>
+	const data = await resp.json()
+	const result = dataResponseGuard(data)
+	return result
 }
 
 /**

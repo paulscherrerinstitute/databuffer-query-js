@@ -36,15 +36,15 @@ export interface Event {
 	[EventField.EVENT_COUNT]?: number
 	[EventField.GLOBAL_DATE]?: string
 	[EventField.GLOBAL_MILLIS]?: number
-	[EventField.GLOBAL_SECONDS]?: number
+	[EventField.GLOBAL_SECONDS]?: number | string
 	[EventField.IOC_DATE]?: string
 	[EventField.IOC_MILLIS]?: number
-	[EventField.IOC_SECONDS]?: number
+	[EventField.IOC_SECONDS]?: number | string
 	[EventField.PULSE_ID]?: number
 	[EventField.SEVERITY]?: number
 	[EventField.SHAPE]?: number[]
 	[EventField.STATUS]?: number
-	[EventField.TRANSFORMED_VALUE]?: any // ### TODO: specify more correctly
+	[EventField.TRANSFORMED_VALUE]?: unknown // ### TODO: specify more correctly
 	[EventField.VALUE]?:
 		| number
 		| number[]

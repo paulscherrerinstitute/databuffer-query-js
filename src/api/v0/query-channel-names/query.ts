@@ -1,3 +1,4 @@
+import { channelNamesResponseGuard } from '../apiv0decoders'
 import { post } from '../httputil'
 import { ChannelNamesResponse } from './response'
 
@@ -64,5 +65,7 @@ export const queryChannelNames = async (
 ): Promise<ChannelNamesResponse> => {
 	const endpoint = `${baseUrl}/channels`
 	const resp = await post(endpoint, query)
-	return resp.json() as Promise<ChannelNamesResponse>
+	const data = await resp.json()
+	const result = channelNamesResponseGuard(data)
+	return result
 }

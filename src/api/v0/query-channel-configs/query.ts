@@ -1,3 +1,4 @@
+import { channelConfigsResponseGuard } from '../apiv0decoders'
 import { post } from '../httputil'
 import type { ChannelConfigsResponse } from './response'
 
@@ -70,5 +71,7 @@ export const queryChannelConfigs = async (
 ): Promise<ChannelConfigsResponse> => {
 	const endpoint = `${baseUrl}/channels/config`
 	const resp = await post(endpoint, query)
-	return resp.json() as Promise<ChannelConfigsResponse>
+	const data = await resp.json()
+	const result = channelConfigsResponseGuard(data)
+	return result
 }

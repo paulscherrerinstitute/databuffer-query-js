@@ -11,7 +11,7 @@ describe('query-channel-names', () => {
 	beforeEach(() => {
 		mockedPost.mockClear()
 		mockedPost.mockResolvedValue({
-			json: () => Promise.resolve({}),
+			json: () => Promise.resolve([]),
 		} as Response)
 	})
 

@@ -11,7 +11,7 @@ describe('module query-channel-config', () => {
 	beforeEach(() => {
 		mockedPost.mockClear()
 		mockedPost.mockResolvedValue({
-			json: () => Promise.resolve({}),
+			json: () => Promise.resolve([]),
 		} as Response)
 	})
 

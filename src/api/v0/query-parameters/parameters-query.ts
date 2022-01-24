@@ -1,3 +1,4 @@
+import { parametersResponseGuard } from '../apiv0decoders'
 import { get } from '../httputil'
 import type { ParametersResponse } from './parameters-response'
 
@@ -16,7 +17,9 @@ export const queryAggregations = async (
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/aggregations`
 	const resp = await get(endpoint)
-	return resp.json() as Promise<ParametersResponse>
+	const data = await resp.json()
+	const result = parametersResponseGuard(data)
+	return result
 }
 
 /**
@@ -34,7 +37,9 @@ export const queryBackends = async (
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/backends`
 	const resp = await get(endpoint)
-	return resp.json() as Promise<ParametersResponse>
+	const data = await resp.json()
+	const result = parametersResponseGuard(data)
+	return result
 }
 
 /**
@@ -52,7 +57,9 @@ export const queryCompression = async (
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/compression`
 	const resp = await get(endpoint)
-	return resp.json() as Promise<ParametersResponse>
+	const data = await resp.json()
+	const result = parametersResponseGuard(data)
+	return result
 }
 
 /**
@@ -70,7 +77,9 @@ export const queryConfigFields = async (
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/configfields`
 	const resp = await get(endpoint)
-	return resp.json() as Promise<ParametersResponse>
+	const data = await resp.json()
+	const result = parametersResponseGuard(data)
+	return result
 }
 
 /**
@@ -88,7 +97,9 @@ export const queryEventFields = async (
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/eventfields`
 	const resp = await get(endpoint)
-	return resp.json() as Promise<ParametersResponse>
+	const data = await resp.json()
+	const result = parametersResponseGuard(data)
+	return result
 }
 
 /**
@@ -106,7 +117,9 @@ export const queryOrdering = async (
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/ordering`
 	const resp = await get(endpoint)
-	return resp.json() as Promise<ParametersResponse>
+	const data = await resp.json()
+	const result = parametersResponseGuard(data)
+	return result
 }
 
 /**
@@ -124,5 +137,7 @@ export const queryResponseFormats = async (
 ): Promise<ParametersResponse> => {
 	const endpoint = `${baseUrl}/params/responseformat`
 	const resp = await get(endpoint)
-	return resp.json() as Promise<ParametersResponse>
+	const data = await resp.json()
+	const result = parametersResponseGuard(data)
+	return result
 }
