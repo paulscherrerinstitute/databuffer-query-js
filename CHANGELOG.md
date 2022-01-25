@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.5](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.7.4...v0.7.5) (2022-01-25)
+
+
+### Features
+
+* correlate data series ([3b11da0](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/3b11da02656c1f7d45476047f4b3e30d9601c1ee)), closes [#26](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/26)
+* validate API v0 responses ([54faa1f](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/54faa1ff0d9a8bfc233dea1f46e6da4049447fe0))
+
 ### [0.7.4](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.7.3...v0.7.4) (2021-12-03)
 
 
