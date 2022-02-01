@@ -5,6 +5,10 @@ JS client library for the Data API. The client library supports these API versio
 - API v0 [(link to documentation)](https://git.psi.ch/sf_daq/ch.psi.daq.databuffer/tree/master/ch.psi.daq.queryrest)
 - API v4 [(link to documentation)](https://data-api.psi.ch/api/4/documentation/)
 
+## Change log
+
+The change log is [located here](./CHANGELOG.md).
+
 ## Installation
 
 The npm package for _databuffer-query-js_ is hosted on [GitHub packages](https://github.com/features/packages). You need to setup the npm project in which you want to use _databuffer-query-js_ to use the GitHub packages npm package registry (instead of the default registry). To do that [GitHub packages documentation](https://docs.github.com/en/packages/using-github-packages-with-your-projects-ecosystem/configuring-npm-for-use-with-github-packages) recommends to create a file `.npmrc` in your npm project's root directory (next to `package.json`). This file should look something like this:
