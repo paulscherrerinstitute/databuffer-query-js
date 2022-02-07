@@ -1,5 +1,5 @@
-import { fetchWithTimeout } from '../http'
-import { dataApiVersionResponseGuard } from './v4/apiv4decoders'
+import { fetchWithTimeout } from '../http.js'
+import { dataApiVersionResponseGuard } from './v4/apiv4decoders.js'
 
 /**
  * Contact the API provider at base URL `url` and try to read

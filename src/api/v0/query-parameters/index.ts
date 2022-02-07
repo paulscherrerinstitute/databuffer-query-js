@@ -1,2 +1,2 @@
-export * from './parameters-query'
-export * from './parameters-response'
+export * from './parameters-query.js'
+export * from './parameters-response.js'

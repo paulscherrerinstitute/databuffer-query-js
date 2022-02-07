@@ -1,4 +1,4 @@
-import { fetchWithTimeout } from '../../http'
+import { fetchWithTimeout } from '../../http.js'
 
 export const DEFAULT_TIMEOUT = 10000 // milliseconds
 

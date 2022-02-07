@@ -1,11 +1,11 @@
-import { dataResponseGuard } from '../apiv0decoders'
-import { post } from '../httputil'
-import type { Channel } from '../channel'
-import type { DataQueryRange } from './range'
-import type { AggregationSpecification } from './aggregation'
-import type { DataResponse, DataResponseFormat } from './response'
-import type { ConfigField, EventField } from './fields'
-import { MappingSpecification } from './mapping'
+import { dataResponseGuard } from '../apiv0decoders.js'
+import { post } from '../httputil.js'
+import type { Channel } from '../channel.js'
+import type { DataQueryRange } from './range.js'
+import type { AggregationSpecification } from './aggregation.js'
+import type { DataResponse, DataResponseFormat } from './response.js'
+import type { ConfigField, EventField } from './fields.js'
+import { MappingSpecification } from './mapping.js'
 
 /**
  * DataQuery defines a query for data points

@@ -1,12 +1,12 @@
-import { objectToGetParams } from '../../http'
-import { get, DEFAULT_TIMEOUT } from './httputil'
+import { objectToGetParams } from '../../http.js'
+import { get, DEFAULT_TIMEOUT } from './httputil.js'
 import {
 	backendsResponseGuard,
 	binnedQueryResponseGuard,
 	channelSearchResponseGuard,
 	dataApiVersionResponseGuard,
 	eventsQueryResponseGuard,
-} from './apiv4decoders'
+} from './apiv4decoders.js'
 
 /** response for a backends query operation */
 export type DataApiV4BackendsQueryResult = {

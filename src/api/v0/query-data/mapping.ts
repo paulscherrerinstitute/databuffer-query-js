@@ -1,4 +1,4 @@
-import { AggregationOperation } from './aggregation'
+import { AggregationOperation } from './aggregation.js'
 
 /**
  * MappingSpecification allows for mapping response data based on their pulse or global time

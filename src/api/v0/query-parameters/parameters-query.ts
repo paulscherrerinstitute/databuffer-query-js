@@ -1,6 +1,6 @@
-import { parametersResponseGuard } from '../apiv0decoders'
-import { get } from '../httputil'
-import type { ParametersResponse } from './parameters-response'
+import { parametersResponseGuard } from '../apiv0decoders.js'
+import { get } from '../httputil.js'
+import type { ParametersResponse } from './parameters-response.js'
 
 /**
  * Query the REST API for available aggregation operations.

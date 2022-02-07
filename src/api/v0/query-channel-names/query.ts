@@ -1,6 +1,6 @@
-import { channelNamesResponseGuard } from '../apiv0decoders'
-import { post } from '../httputil'
-import { ChannelNamesResponse } from './response'
+import { channelNamesResponseGuard } from '../apiv0decoders.js'
+import { post } from '../httputil.js'
+import type { ChannelNamesResponse } from './response.js'
 
 /**
  * Ordering defines how the backend should order the results of a query.

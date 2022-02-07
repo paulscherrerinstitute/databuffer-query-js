@@ -1,6 +1,6 @@
-import { Channel } from '../channel'
-import { EventField } from './fields'
-import { AggregationResult } from './aggregation'
+import { Channel } from '../channel.js'
+import { EventField } from './fields.js'
+import { AggregationResult } from './aggregation.js'
 
 /**
  * DataResponse defines the structure of the response from the API.

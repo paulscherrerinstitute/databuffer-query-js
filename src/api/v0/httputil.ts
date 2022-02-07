@@ -2,8 +2,7 @@
  * Module apiv0http contains HTTP helpers for convenience.
  */
 
-import { resolve } from 'path'
-import { fetchWithTimeout } from '../../http'
+import { fetchWithTimeout } from '../../http.js'
 
 /**
  * COMMON_FETCH_OPTIONS provides a base for `fetch` calls for working

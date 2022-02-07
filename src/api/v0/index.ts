@@ -4,18 +4,18 @@
  * See https://git.psi.ch/sf_daq/ch.psi.daq.databuffer/blob/master/ch.psi.daq.queryrest/Readme.md
  */
 
-import { queryChannelConfigs } from './query-channel-configs'
+import { queryChannelConfigs } from './query-channel-configs/index.js'
 import type {
 	ChannelConfigsQuery,
 	ChannelConfigsResponse,
-} from './query-channel-configs'
-import { queryChannelNames } from './query-channel-names'
+} from './query-channel-configs/index.js'
+import { queryChannelNames } from './query-channel-names/index.js'
 import type {
 	ChannelNamesQuery,
 	ChannelNamesResponse,
-} from './query-channel-names'
-import { queryData, queryDataRaw } from './query-data'
-import type { DataQuery, DataResponse } from './query-data'
+} from './query-channel-names/index.js'
+import { queryData, queryDataRaw } from './query-data/index.js'
+import type { DataQuery, DataResponse } from './query-data/index.js'
 import {
 	queryAggregations,
 	queryBackends,
@@ -24,8 +24,8 @@ import {
 	queryEventFields,
 	queryOrdering,
 	queryResponseFormats,
-} from './query-parameters'
-import type { ParametersResponse } from './query-parameters'
+} from './query-parameters/index.js'
+import type { ParametersResponse } from './query-parameters/index.js'
 
 export type {
 	DataQuery,
