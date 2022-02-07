@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.7.6](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.7.5...v0.7.6) (2022-02-07)
+
+
+### Bug Fixes
+
+* add type:module to package.json ([d4fddb6](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/d4fddb6adadb20b84d3c852703ba8cc80d3dc61d)), closes [#29](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/29)
+* disable validation for api v0 ([590374d](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/590374d1748294fcdf435330474920dbaa112ea0)), closes [#27](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/27)
+* import paths use .js extension ([d9a434c](https://github.com/paulscherrerinstitute/databuffer-query-js/commit/d9a434c32e9345d38350e65b0bbb5ef1b887651b)), closes [#28](https://github.com/paulscherrerinstitute/databuffer-query-js/issues/28)
+
 ### [0.7.5](https://github.com/paulscherrerinstitute/databuffer-query-js/compare/v0.7.4...v0.7.5) (2022-01-25)
 
 
