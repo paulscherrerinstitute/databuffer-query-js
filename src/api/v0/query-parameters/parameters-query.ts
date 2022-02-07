@@ -18,7 +18,11 @@ export const queryAggregations = async (
 	const endpoint = `${baseUrl}/params/aggregations`
 	const resp = await get(endpoint)
 	const data = await resp.json()
-	const result = parametersResponseGuard(data)
+	// validation is currently broken, see
+	// https://github.com/paulscherrerinstitute/databuffer-query-js/issues/27
+	//
+	// const result = parametersResponseGuard(data)
+	const result = data as ParametersResponse
 	return result
 }
 
@@ -38,7 +42,11 @@ export const queryBackends = async (
 	const endpoint = `${baseUrl}/params/backends`
 	const resp = await get(endpoint)
 	const data = await resp.json()
-	const result = parametersResponseGuard(data)
+	// validation is currently broken, see
+	// https://github.com/paulscherrerinstitute/databuffer-query-js/issues/27
+	//
+	// const result = parametersResponseGuard(data)
+	const result = data as ParametersResponse
 	return result
 }
 
@@ -58,7 +66,11 @@ export const queryCompression = async (
 	const endpoint = `${baseUrl}/params/compression`
 	const resp = await get(endpoint)
 	const data = await resp.json()
-	const result = parametersResponseGuard(data)
+	// validation is currently broken, see
+	// https://github.com/paulscherrerinstitute/databuffer-query-js/issues/27
+	//
+	// const result = parametersResponseGuard(data)
+	const result = data as ParametersResponse
 	return result
 }
 
@@ -78,7 +90,11 @@ export const queryConfigFields = async (
 	const endpoint = `${baseUrl}/params/configfields`
 	const resp = await get(endpoint)
 	const data = await resp.json()
-	const result = parametersResponseGuard(data)
+	// validation is currently broken, see
+	// https://github.com/paulscherrerinstitute/databuffer-query-js/issues/27
+	//
+	// const result = parametersResponseGuard(data)
+	const result = data as ParametersResponse
 	return result
 }
 
@@ -98,7 +114,11 @@ export const queryEventFields = async (
 	const endpoint = `${baseUrl}/params/eventfields`
 	const resp = await get(endpoint)
 	const data = await resp.json()
-	const result = parametersResponseGuard(data)
+	// validation is currently broken, see
+	// https://github.com/paulscherrerinstitute/databuffer-query-js/issues/27
+	//
+	// const result = parametersResponseGuard(data)
+	const result = data as ParametersResponse
 	return result
 }
 
@@ -118,7 +138,11 @@ export const queryOrdering = async (
 	const endpoint = `${baseUrl}/params/ordering`
 	const resp = await get(endpoint)
 	const data = await resp.json()
-	const result = parametersResponseGuard(data)
+	// validation is currently broken, see
+	// https://github.com/paulscherrerinstitute/databuffer-query-js/issues/27
+	//
+	// const result = parametersResponseGuard(data)
+	const result = data as ParametersResponse
 	return result
 }
 
@@ -138,6 +162,10 @@ export const queryResponseFormats = async (
 	const endpoint = `${baseUrl}/params/responseformat`
 	const resp = await get(endpoint)
 	const data = await resp.json()
-	const result = parametersResponseGuard(data)
+	// validation is currently broken, see
+	// https://github.com/paulscherrerinstitute/databuffer-query-js/issues/27
+	//
+	// const result = parametersResponseGuard(data)
+	const result = data as ParametersResponse
 	return result
 }

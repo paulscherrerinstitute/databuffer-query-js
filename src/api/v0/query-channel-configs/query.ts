@@ -72,6 +72,10 @@ export const queryChannelConfigs = async (
 	const endpoint = `${baseUrl}/channels/config`
 	const resp = await post(endpoint, query)
 	const data = await resp.json()
-	const result = channelConfigsResponseGuard(data)
+	// validation is currently broken, see
+	// https://github.com/paulscherrerinstitute/databuffer-query-js/issues/27
+	//
+	// const result = channelConfigsResponseGuard(data)
+	const result = data as ChannelConfigsResponse
 	return result
 }

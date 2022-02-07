@@ -66,6 +66,10 @@ export const queryChannelNames = async (
 	const endpoint = `${baseUrl}/channels`
 	const resp = await post(endpoint, query)
 	const data = await resp.json()
-	const result = channelNamesResponseGuard(data)
+	// validation is currently broken, see
+	// https://github.com/paulscherrerinstitute/databuffer-query-js/issues/27
+	//
+	// const result = channelNamesResponseGuard(data)
+	const result = data as ChannelNamesResponse
 	return result
 }

@@ -96,7 +96,11 @@ export const queryData = async (
 	const endpoint = `${baseUrl}/query`
 	const resp = await post(endpoint, query)
 	const data = await resp.json()
-	const result = dataResponseGuard(data)
+	// validation is currently broken, see
+	// https://github.com/paulscherrerinstitute/databuffer-query-js/issues/27
+	//
+	// const result = dataResponseGuard(data)
+	const result = data as DataResponse
 	return result
 }
 
